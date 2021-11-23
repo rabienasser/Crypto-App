@@ -1,0 +1,8 @@
+// @use 'App';
+
+.coin-list-coin {
+    display: flex;
+    padding: 20px 0;
+    margin: 2px 0;
+    // @include App.flexCenter;
+}

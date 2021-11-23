@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Coin, CoinList } from "../../store/coinList/types";
+import './coinListCoin.style.scss'
 
 interface CoinProps {
    coin: Coin;
@@ -25,7 +26,7 @@ const CoinListCoin: FC<CoinProps> = ({ coin, data }) => {
    };
 
    return (
-      <div>
+      <div className='coin-list-coin'>
          <p>{rank + 1}</p>
          <img
             src={coin.image}

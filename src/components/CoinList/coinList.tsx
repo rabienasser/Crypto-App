@@ -7,8 +7,10 @@ import {
    getCoinsByVolume,
    sortPrice,
    sortName,
+   sort1Hour,
 } from "../../store/coinList/actions";
 import CoinListCoin from "../CoinListCoin/coinListCoin";
+import "./coinList.style.scss";
 
 const CoinList: FC = () => {
    const { data, isLoading, marketCap } = useSelector(
@@ -20,6 +22,9 @@ const CoinList: FC = () => {
    return (
       <div className="coin-list">
          {isLoading && <h1>Loading...</h1>}
+         <button onClick={() => dispatch(sort1Hour())}>1 Hour</button>
+         <button onClick={() => dispatch(sort24Hour())}>24 Hour</button>
+         <button onClick={() => dispatch(sort7Day())}>7 Day</button>
          <button onClick={() => dispatch(sortName())}>Name</button>
          <button onClick={() => dispatch(sortPrice())}>Price</button>
          <button
