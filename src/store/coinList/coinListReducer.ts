@@ -1,4 +1,4 @@
-import { CoinList, CoinListAction, Coin, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_ERROR, SET_LOADING, SORT_PRICE, SORT_NAME } from './types'
+import { CoinList, CoinListAction, Coin, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_ERROR, SET_LOADING, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY } from './types'
 
 interface CoinListState {
     data?: CoinList | null
@@ -54,6 +54,24 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
                 ...state,
                 sorted: !state.sorted,
                 data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.name.localeCompare(b.name)) : state.data?.sort((a: Coin, b: Coin) => b.name.localeCompare(a.name))
+            }
+        case SORT_1_HOUR:
+            return {
+                ...state,
+                sorted: !state.sorted,
+                data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.price_change_percentage_1h_in_currency - b.price_change_percentage_1h_in_currency) : state.data?.sort((a: Coin, b: Coin) => b.price_change_percentage_1h_in_currency - a.price_change_percentage_1h_in_currency)
+            }
+        case SORT_24_HOUR:
+            return {
+                ...state,
+                sorted: !state.sorted,
+                data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.price_change_percentage_24h_in_currency - b.price_change_percentage_24h_in_currency) : state.data?.sort((a: Coin, b: Coin) => b.price_change_percentage_24h_in_currency - a.price_change_percentage_24h_in_currency)
+            }
+        case SORT_7_DAY:
+            return {
+                ...state,
+                sorted: !state.sorted,
+                data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.price_change_percentage_7d_in_currency - b.price_change_percentage_7d_in_currency) : state.data?.sort((a: Coin, b: Coin) => b.price_change_percentage_7d_in_currency - a.price_change_percentage_7d_in_currency)
             }
         default: return state
     }

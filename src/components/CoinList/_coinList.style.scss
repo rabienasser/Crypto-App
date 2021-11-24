@@ -1,0 +1,10 @@
+// @use "App";
+$red: red;
+
+.coin-list {
+   width: 90%;
+   margin: auto;
+   padding: 10px 0;
+   background: #191b1f;
+   // background: App.$dark-background;
+}

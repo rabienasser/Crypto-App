@@ -8,9 +8,11 @@ import {
    sortPrice,
    sortName,
    sort1Hour,
+   sort24Hour,
+   sort7Day,
 } from "../../store/coinList/actions";
 import CoinListCoin from "../CoinListCoin/coinListCoin";
-import "./coinList.style.scss";
+import "./_coinList.style.scss";
 
 const CoinList: FC = () => {
    const { data, isLoading, marketCap } = useSelector(

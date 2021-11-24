@@ -1,3 +1,4 @@
+
 $dark-background: #191b1f;
 $grey-background: #1f2128;
 $neon-green: #06d921;
@@ -19,6 +20,7 @@ $neon-red: #fe1040;
 .App {
    background: $dark-background;
    color: white;
+   // color: coinList.$red;
 }
 
 .home-container {

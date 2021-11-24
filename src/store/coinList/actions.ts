@@ -1,6 +1,6 @@
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../index";
-import { GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_LOADING, SET_ERROR, SORT_PRICE, SORT_NAME, CoinListAction, CoinList } from "./types";
+import { GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_LOADING, SET_ERROR, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CoinListAction, CoinList } from "./types";
 
 export const getCoinsByMarketCap = (): ThunkAction<void, RootState, null, CoinListAction> => async (dispatch) => {
     try {
@@ -51,5 +51,23 @@ export const sortPrice = () => {
 export const sortName = () => {
     return {
         type: SORT_NAME
+    }
+}
+
+export const sort1Hour = () => {
+    return {
+        type: SORT_1_HOUR
+    }
+}
+
+export const sort24Hour = () => {
+    return {
+        type: SORT_24_HOUR
+    }
+}
+
+export const sort7Day = () => {
+    return {
+        type: SORT_7_DAY
     }
 }

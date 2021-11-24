@@ -4,6 +4,9 @@ export const SET_LOADING = 'SET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
 export const SORT_PRICE = 'SORT_PRICE'
 export const SORT_NAME = 'SORT_NAME'
+export const SORT_1_HOUR = 'SORT_1_HOUR'
+export const SORT_24_HOUR = 'SORT_24_HOUR'
+export const SORT_7_DAY = 'SORT_7_DAY'
 
 
 export interface Coin {
@@ -70,4 +73,16 @@ interface SortName {
     type: typeof SORT_NAME
 }
 
-export type CoinListAction = GetCoinsByMarketCap | GetCoinsByVolume | SetLoading | SetError | SortPrice | SortName
+interface Sort1Hour {
+    type: typeof SORT_1_HOUR
+}
+
+interface Sort24Hour {
+    type: typeof SORT_24_HOUR
+}
+
+interface Sort7Day {
+    type: typeof SORT_7_DAY
+}
+
+export type CoinListAction = GetCoinsByMarketCap | GetCoinsByVolume | SetLoading | SetError | SortPrice | SortName | Sort1Hour | Sort24Hour | Sort7Day
