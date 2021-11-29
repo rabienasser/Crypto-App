@@ -1,3 +1,4 @@
+export const SET_BOTTOM_OR_TOP_COINS = 'SET_BOTTOM_OR_TOP_COINS'
 export const GET_COINS_BY_MARKET_CAP = 'GET_COINS_BY_MARKET_CAP'
 export const GET_COINS_BY_VOLUME = 'GET_COINS_BY_VOLUME'
 export const SET_LOADING = 'SET_LOADING'
@@ -7,6 +8,7 @@ export const SORT_NAME = 'SORT_NAME'
 export const SORT_1_HOUR = 'SORT_1_HOUR'
 export const SORT_24_HOUR = 'SORT_24_HOUR'
 export const SORT_7_DAY = 'SORT_7_DAY'
+export const CHANGE_PAGE = 'CHANGE_PAGE'
 
 
 export interface Coin {
@@ -45,6 +47,10 @@ export interface Coin {
 }
 
 export type CoinList = Coin[]
+
+interface SetBottomOrTopCoins {
+    type: typeof SET_BOTTOM_OR_TOP_COINS
+}
 
 interface GetCoinsByMarketCap {
     type: typeof GET_COINS_BY_MARKET_CAP
@@ -85,4 +91,8 @@ interface Sort7Day {
     type: typeof SORT_7_DAY
 }
 
-export type CoinListAction = GetCoinsByMarketCap | GetCoinsByVolume | SetLoading | SetError | SortPrice | SortName | Sort1Hour | Sort24Hour | Sort7Day
+interface ChangePage {
+    type: typeof CHANGE_PAGE
+}
+
+export type CoinListAction =  GetCoinsByMarketCap | GetCoinsByVolume | SetBottomOrTopCoins | SetLoading | SetError | SortPrice | SortName | Sort1Hour | Sort24Hour | Sort7Day | ChangePage

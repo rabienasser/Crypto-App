@@ -1,12 +1,16 @@
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../index";
-import { GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_LOADING, SET_ERROR, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CoinListAction, CoinList } from "./types";
+import { SET_BOTTOM_OR_TOP_COINS, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_LOADING, SET_ERROR, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CHANGE_PAGE, CoinListAction, CoinList } from "./types";
 
-export const getCoinsByMarketCap = (): ThunkAction<void, RootState, null, CoinListAction> => async (dispatch) => {
+
+export const getCoinsByMarketCap = (top: boolean): ThunkAction<void, RootState, null, CoinListAction> => async (dispatch, getState) => {
+    const state = getState()
+    const { page } = state.coinList
+    
     try {
         dispatch({ type: SET_LOADING })
 
-        const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
+        const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${top ? 'market_cap_desc' : 'market_cap_asc'}&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`)
 
         const coinListData: CoinList = await res.json() 
 
@@ -22,11 +26,14 @@ export const getCoinsByMarketCap = (): ThunkAction<void, RootState, null, CoinLi
     }
 }
 
-export const getCoinsByVolume = (): ThunkAction<void, RootState, null, CoinListAction> => async (dispatch) => {
+export const getCoinsByVolume = (top: boolean): ThunkAction<void, RootState, null, CoinListAction> => async (dispatch, getState) => {
+    const state = getState()
+    const { page } = state.coinList
+    
     try {
         dispatch({ type: SET_LOADING })
 
-        const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=volume_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d')
+        const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=${top ? 'volume_desc' : 'volume_asc'}&per_page=50&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`)
 
         const coinListData: CoinList = await res.json() 
 
@@ -39,6 +46,12 @@ export const getCoinsByVolume = (): ThunkAction<void, RootState, null, CoinListA
             type: SET_ERROR,
             payload: err
          })
+    }
+}
+
+export const setBottomOrTopCoins = () => {
+    return {
+        type: SET_BOTTOM_OR_TOP_COINS
     }
 }
 
@@ -69,5 +82,11 @@ export const sort24Hour = () => {
 export const sort7Day = () => {
     return {
         type: SORT_7_DAY
+    }
+}
+
+export const changePage = () => {
+    return {
+        type: CHANGE_PAGE
     }
 }

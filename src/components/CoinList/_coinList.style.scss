@@ -1,10 +1,102 @@
-// @use "App";
-$red: red;
+@import "../../App";
 
 .coin-list {
    width: 90%;
-   margin: auto;
-   padding: 10px 0;
-   background: #191b1f;
-   // background: App.$dark-background;
+   margin: 30px auto;
+   padding: 20px;
+   background: $dark-background;
+   border-radius: 30px;
+   font-size: 11px;
+
+   table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+         border-bottom: 1px solid grey;
+      }
+
+      th {
+         text-align: left;
+         padding: 0px 16px 8px;
+      }
+
+      td {
+         text-align: left;
+         padding: 28px 16px;
+
+         .coin-image {
+            height: 34px;
+            width: 34px;
+            margin-right: 10px;
+         }
+
+         .caret {
+            font-size: 15px;
+            margin-right: 5px;
+         }
+      }
+   }
+}
+
+.coin-name,
+.percent-change {
+   display: flex;
+   p {
+      margin: auto 0;
+   }
+}
+
+.neg-value {
+   color: $neon-red;
+}
+
+.pos-value {
+   color: $neon-green;
+}
+
+.coin-list-coin {
+   &:not(:last-child) {
+      border-bottom: 1px solid grey;
+   }
+}
+
+.filter-btn {
+   border: none;
+   color: white;
+   background: transparent;
+   cursor: pointer;
+   margin: 0 5px;
+}
+
+.table-details {
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20px;
+
+   .split {
+      display: flex;
+
+      .adjust-chart {
+         display: flex;
+         margin: 0 10px;
+
+         h1,
+         h3 {
+            margin: auto;
+         }
+
+         h1 {
+            font-size: 28px;
+         }
+
+         h3 {
+            font-size: 15px;
+         }
+
+         .page-btn-div {
+            display: flex;
+         }
+      }
+   }
 }
