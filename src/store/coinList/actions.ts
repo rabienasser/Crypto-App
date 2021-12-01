@@ -85,8 +85,9 @@ export const sort7Day = () => {
     }
 }
 
-export const changePage = () => {
+export const changePage = (bool: boolean) => {
     return {
-        type: CHANGE_PAGE
+        type: CHANGE_PAGE,
+        payload: bool
     }
 }

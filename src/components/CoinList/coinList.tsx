@@ -1,15 +1,6 @@
 import React, { FC } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-   faSort,
-   faFilter,
-   faCaretRight,
-   faCaretLeft,
-   faCaretDown,
-} from "@fortawesome/free-solid-svg-icons";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/index";
-import { Coin } from "../../store/coinList/types";
+import { RootState } from "store/index";
+import { Coin } from "store/coinList/types";
 import {
    getCoinsByMarketCap,
    setBottomOrTopCoins,
@@ -20,9 +11,18 @@ import {
    sort24Hour,
    sort7Day,
    changePage,
-} from "../../store/coinList/actions";
-import CoinListCoin from "../CoinListCoin/coinListCoin";
-import "./_coinList.style.scss";
+} from "store/coinList/actions";
+import { CoinListCoin } from "components";
+import { useSelector, useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+   faSort,
+   faFilter,
+   faCaretRight,
+   faCaretLeft,
+   faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
+import "./coinList.style.scss";
 
 const CoinList: FC = () => {
    const { data, isLoading, marketCap, top, page } = useSelector(
@@ -69,12 +69,15 @@ const CoinList: FC = () => {
                <div className="adjust-chart">
                   <h3>PAGE</h3>
                   <div className="page-btn-div">
-                     <button className="filter-btn">
+                     <button
+                        className="filter-btn"
+                        onClick={() => dispatch(changePage(false))}
+                     >
                         <FontAwesomeIcon icon={faCaretLeft} />
                      </button>
                      <h3>{page}</h3>
                      <button
-                        onClick={() => dispatch(changePage())}
+                        onClick={() => dispatch(changePage(true))}
                         className="filter-btn"
                      >
                         <FontAwesomeIcon icon={faCaretRight} />
@@ -132,19 +135,14 @@ const CoinList: FC = () => {
                         <FontAwesomeIcon icon={faFilter} />
                      </button>
                   </th>
-                  <th>24h / Market Cap</th>
+                  <th>24h Vol / Market Cap</th>
                   <th>Circulating / Total Sup</th>
                   <th>Last 7d</th>
                </tr>
             </thead>
             <tbody>
                {data?.map((coin: Coin, idx) => (
-                  <CoinListCoin
-                     key={coin.id}
-                     coin={coin}
-                     idx={idx}
-                     data={data}
-                  />
+                  <CoinListCoin key={coin.id} coin={coin} idx={idx} />
                ))}
             </tbody>
          </table>

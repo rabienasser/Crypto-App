@@ -24,6 +24,10 @@ $neon-red: #fe1040;
 
 .home-container {
    width: 78%;
+   padding: 30px 0;
    margin: auto;
    background: $grey-background;
+   @media (max-width: 1400px) {
+      width: 90%;
+   }
 }

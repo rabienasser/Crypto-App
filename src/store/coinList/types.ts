@@ -93,6 +93,7 @@ interface Sort7Day {
 
 interface ChangePage {
     type: typeof CHANGE_PAGE
+    payload: boolean
 }
 
 export type CoinListAction =  GetCoinsByMarketCap | GetCoinsByVolume | SetBottomOrTopCoins | SetLoading | SetError | SortPrice | SortName | Sort1Hour | Sort24Hour | Sort7Day | ChangePage

@@ -1,11 +1,8 @@
 import React, { FC, useEffect } from "react";
-import { RootState } from "../store";
+import { CoinList } from "components";
+import { getCoinsByMarketCap, getCoinsByVolume } from "store/coinList/actions";
+import { RootState } from "store";
 import { useDispatch, useSelector } from "react-redux";
-import {
-   getCoinsByMarketCap,
-   getCoinsByVolume,
-} from "../store/coinList/actions";
-import CoinList from "../components/CoinList/coinList";
 
 const HomePage: FC = () => {
    const { marketCap, top, page } = useSelector(
@@ -28,9 +25,7 @@ const HomePage: FC = () => {
    return (
       <div className="home-page">
          <div className="home-container">
-            <div>d</div>
             <CoinList />
-            <div>d</div>
          </div>
       </div>
    );

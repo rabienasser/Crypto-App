@@ -1,9 +1,9 @@
-@import "../../App";
+@import "App.scss";
 
 .coin-list {
    width: 90%;
-   margin: 30px auto;
-   padding: 20px;
+   margin: auto;
+   padding: 20px 10px;
    background: $dark-background;
    border-radius: 30px;
    font-size: 11px;
@@ -23,7 +23,7 @@
 
       td {
          text-align: left;
-         padding: 28px 16px;
+         padding: 28px 5px;
 
          .coin-image {
             height: 34px;

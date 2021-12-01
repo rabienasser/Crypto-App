@@ -85,7 +85,7 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
         case CHANGE_PAGE:
             return {
                 ...state,
-                page: state.page + 1
+                page: action.payload ? state.page + 1 : state.page === 1 ? state.page = 1 : state.page - 1
             }
         default: return state
     }
