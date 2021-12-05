@@ -1,7 +1,7 @@
 import { CoinList, CoinListAction, Coin, SET_BOTTOM_OR_TOP_COINS, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_ERROR, SET_LOADING, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CHANGE_PAGE } from './types'
 
 interface CoinListState {
-    data?: CoinList | null
+    data?: CoinList | null 
     isLoading: boolean
     error: boolean,
     sorted: boolean,
@@ -21,6 +21,8 @@ const initialState = {
 }
 
 const coinListReducer = (state: CoinListState = initialState, action: CoinListAction): CoinListState => {
+    let sortedData: CoinList;
+
     switch(action.type) {
         case SET_LOADING:
             return {
@@ -53,34 +55,59 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
                 error: true
             }
         case SORT_PRICE:
+            if (state.sorted){
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.current_price - b.current_price)
+            } else {
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.current_price - a.current_price)
+            }
             return {
                 ...state,
                 sorted: !state.sorted,
-                data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.current_price - b.current_price) : state.data?.sort((a: Coin, b: Coin) => b.current_price - a.current_price)
+                data: sortedData
             }
         case SORT_NAME:
+            if (state.sorted){
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.name.localeCompare(b.name))
+            } else {
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.name.localeCompare(a.name))
+            }
             return {
                 ...state,
                 sorted: !state.sorted,
-                data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.name.localeCompare(b.name)) : state.data?.sort((a: Coin, b: Coin) => b.name.localeCompare(a.name))
+                data: sortedData
             }
         case SORT_1_HOUR:
+            if (state.sorted){
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.price_change_percentage_1h_in_currency - b.price_change_percentage_1h_in_currency)
+            } else {
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.price_change_percentage_1h_in_currency - a.price_change_percentage_1h_in_currency)
+            }
             return {
                 ...state,
                 sorted: !state.sorted,
-                data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.price_change_percentage_1h_in_currency - b.price_change_percentage_1h_in_currency) : state.data?.sort((a: Coin, b: Coin) => b.price_change_percentage_1h_in_currency - a.price_change_percentage_1h_in_currency)
+                data: sortedData
             }
         case SORT_24_HOUR:
+            if (state.sorted){
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.price_change_percentage_24h_in_currency - b.price_change_percentage_24h_in_currency)
+            } else {
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.price_change_percentage_24h_in_currency - a.price_change_percentage_24h_in_currency)
+            }
             return {
                 ...state,
                 sorted: !state.sorted,
-                data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.price_change_percentage_24h_in_currency - b.price_change_percentage_24h_in_currency) : state.data?.sort((a: Coin, b: Coin) => b.price_change_percentage_24h_in_currency - a.price_change_percentage_24h_in_currency)
+                data: sortedData
             }
         case SORT_7_DAY:
+            if (state.sorted){
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.price_change_percentage_7d_in_currency - b.price_change_percentage_7d_in_currency)
+            } else {
+                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.price_change_percentage_7d_in_currency - a.price_change_percentage_7d_in_currency)
+            }
             return {
                 ...state,
                 sorted: !state.sorted,
-                data: state.sorted ? state.data?.sort((a: Coin, b: Coin) => a.price_change_percentage_7d_in_currency - b.price_change_percentage_7d_in_currency) : state.data?.sort((a: Coin, b: Coin) => b.price_change_percentage_7d_in_currency - a.price_change_percentage_7d_in_currency)
+                data: sortedData
             }
         case CHANGE_PAGE:
             return {

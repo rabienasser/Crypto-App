@@ -12,7 +12,7 @@ import {
    sort7Day,
    changePage,
 } from "store/coinList/actions";
-import { CoinListCoin } from "components";
+import { CoinListCoin, Loading } from "components";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -33,7 +33,6 @@ const CoinList: FC = () => {
 
    return (
       <div className="coin-list">
-         {isLoading && <h1>Loading...</h1>}
          <div className="table-details">
             <div className="split">
                <div className="adjust-chart">
@@ -146,6 +145,7 @@ const CoinList: FC = () => {
                ))}
             </tbody>
          </table>
+         {isLoading && <Loading />}
       </div>
    );
 };
