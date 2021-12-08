@@ -59,6 +59,10 @@
    &:not(:last-child) {
       border-bottom: 1px solid grey;
    }
+
+   &:hover {
+      background: $grey-background;
+   }
 }
 
 .filter-btn {
@@ -96,6 +100,28 @@
 
          .page-btn-div {
             display: flex;
+         }
+      }
+
+      .show-coins {
+         position: relative;
+
+         .drop-down {
+            position: absolute;
+            background: $dark-background;
+            top: 100%;
+            right: 0%;
+            border: 1px solid grey;
+            border-radius: 5px;
+
+            li {
+               padding: 12px;
+               cursor: pointer;
+
+               &:hover {
+                  background: $grey-background;
+               }
+            }
          }
       }
    }
