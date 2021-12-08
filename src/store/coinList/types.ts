@@ -9,6 +9,7 @@ export const SORT_1_HOUR = 'SORT_1_HOUR'
 export const SORT_24_HOUR = 'SORT_24_HOUR'
 export const SORT_7_DAY = 'SORT_7_DAY'
 export const CHANGE_PAGE = 'CHANGE_PAGE'
+export const CHANGE_PER_PAGE = 'CHANGE_PER_PAGE'
 
 
 export interface Coin {
@@ -96,4 +97,9 @@ interface ChangePage {
     payload: boolean
 }
 
-export type CoinListAction =  GetCoinsByMarketCap | GetCoinsByVolume | SetBottomOrTopCoins | SetLoading | SetError | SortPrice | SortName | Sort1Hour | Sort24Hour | Sort7Day | ChangePage
+interface ChangePerPage {
+    type: typeof CHANGE_PER_PAGE
+    payload: number
+}
+
+export type CoinListAction =  GetCoinsByMarketCap | GetCoinsByVolume | SetBottomOrTopCoins | SetLoading | SetError | SortPrice | SortName | Sort1Hour | Sort24Hour | Sort7Day | ChangePage | ChangePerPage

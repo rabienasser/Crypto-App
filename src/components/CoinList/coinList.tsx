@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { RootState } from "store/index";
 import { Coin } from "store/coinList/types";
 import {
@@ -11,6 +11,7 @@ import {
    sort24Hour,
    sort7Day,
    changePage,
+   changePerPage,
 } from "store/coinList/actions";
 import { CoinListCoin, Loading } from "components";
 import { useSelector, useDispatch } from "react-redux";
@@ -25,11 +26,20 @@ import {
 import "./coinList.style.scss";
 
 const CoinList: FC = () => {
-   const { data, isLoading, marketCap, top, page } = useSelector(
+   const { data, isLoading, marketCap, top, page, perPage } = useSelector(
       (state: RootState) => state.coinList
    );
 
    const dispatch = useDispatch();
+
+   const [dropDown, setDropDown] = useState(false);
+
+   useEffect(() => {
+      marketCap
+         ? dispatch(getCoinsByMarketCap(top))
+         : dispatch(getCoinsByVolume(top));
+      setDropDown(false);
+   }, [perPage]);
 
    return (
       <div className="coin-list">
@@ -42,7 +52,9 @@ const CoinList: FC = () => {
                   >
                      <FontAwesomeIcon icon={faSort} />
                   </button>
-                  <h1>{top ? "TOP" : "BOT"} 50</h1>
+                  <h1>
+                     {top ? "TOP" : "BOT"} {perPage}
+                  </h1>
                </div>
                <div className="adjust-chart">
                   <h3>BY {marketCap ? "MARKET CAP" : "VOLUME"}</h3>
@@ -59,11 +71,24 @@ const CoinList: FC = () => {
                </div>
             </div>
             <div className="split">
-               <div className="adjust-chart">
-                  <h3>SHOW: 50</h3>
-                  <button className="filter-btn">
+               <div className="adjust-chart show-coins">
+                  <h3>SHOW: {perPage}</h3>
+                  <button
+                     className="filter-btn"
+                     onClick={() => setDropDown(!dropDown)}
+                  >
                      <FontAwesomeIcon icon={faCaretDown} />
                   </button>
+                  {dropDown && (
+                     <ul className="drop-down">
+                        <li onClick={() => dispatch(changePerPage(10))}>10</li>
+                        <li onClick={() => dispatch(changePerPage(20))}>20</li>
+                        <li onClick={() => dispatch(changePerPage(50))}>50</li>
+                        <li onClick={() => dispatch(changePerPage(100))}>
+                           100
+                        </li>
+                     </ul>
+                  )}
                </div>
                <div className="adjust-chart">
                   <h3>PAGE</h3>
