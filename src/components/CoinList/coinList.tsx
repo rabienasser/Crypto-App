@@ -32,7 +32,7 @@ const CoinList: FC = () => {
 
    const dispatch = useDispatch();
 
-   const [dropDown, setDropDown] = useState(false);
+   const [showDropDown, setDropDown] = useState(false);
 
    useEffect(() => {
       marketCap
@@ -75,11 +75,11 @@ const CoinList: FC = () => {
                   <h3>SHOW: {perPage}</h3>
                   <button
                      className="filter-btn"
-                     onClick={() => setDropDown(!dropDown)}
+                     onClick={() => setDropDown(!showDropDown)}
                   >
                      <FontAwesomeIcon icon={faCaretDown} />
                   </button>
-                  {dropDown && (
+                  {showDropDown && (
                      <ul className="drop-down">
                         <li onClick={() => dispatch(changePerPage(10))}>10</li>
                         <li onClick={() => dispatch(changePerPage(20))}>20</li>
