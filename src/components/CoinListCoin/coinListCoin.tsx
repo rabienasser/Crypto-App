@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "components";
 import { Coin } from "store/coinList/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,13 +11,18 @@ interface CoinProps {
 }
 
 const CoinListCoin: FC<CoinProps> = ({ coin, idx }) => {
+   const navigate = useNavigate();
+
    return (
       <tr className="coin-list-coin">
          <td>{idx + 1}</td>
          <td className="coin-name">
             {" "}
             <img className="coin-image" src={coin.image} alt={coin.name} />{" "}
-            <p className="coin-name">
+            <p
+               onClick={() => navigate(`/Coins/${coin.name}`)}
+               className="coin-name"
+            >
                {coin.name} ({coin.symbol.toUpperCase()})
             </p>
          </td>
