@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
+import { convertNumToPercent } from "utils/numberConversions/convertNumToPercent";
 import "./progressBar.style.scss";
 
 interface ProgressBarProps {
@@ -47,56 +49,18 @@ const ProgressBar: FC<ProgressBarProps> = ({ num1, num2, idx }) => {
       ];
    };
 
-   const convertNum = (number: number | null): string => {
-      let newValue: number | string | null = number;
-
-      const suffixes = ["", "K", "M", "B", "T", "Q"];
-      let suffixNum = 0;
-
-      if (newValue !== null) {
-         while (newValue >= 1000) {
-            newValue /= 1000;
-            suffixNum++;
-         }
-
-         newValue = newValue === 0 ? "Omitted" : newValue.toPrecision(3);
-
-         newValue += suffixes[suffixNum];
-      } else {
-         newValue = "∞";
-      }
-
-      return newValue;
-   };
-
-   const convertNumToPercent = (num: number): string => {
-      let progPercString: string = num.toString();
-      if (
-         progPercString === "1" ||
-         progPercString === "Infinity" ||
-         progPercString === "0" ||
-         progPercString === "NaN"
-      ) {
-         progPercString = "100%";
-      } else {
-         progPercString = progPercString.split(".")[1].substr(0, 4);
-         progPercString = parseInt(progPercString) / 100 + "%";
-      }
-      return progPercString;
-   };
-
    return (
       <div className="progress-bar-div">
          <div className="coin-stats">
             <p style={{ color: `${generateColors(idx).color1}` }}>
-               {["Omitted", "∞"].indexOf(convertNum(num1)) < 0
-                  ? `$${convertNum(num1)}`
-                  : `${convertNum(num1)}`}
+               {["Omitted", "∞"].indexOf(convertLargeNum(num1)) < 0
+                  ? `$${convertLargeNum(num1)}`
+                  : `${convertLargeNum(num1)}`}
             </p>
             <p style={{ color: `${generateColors(idx).color2}` }}>
-               {["Omitted", "∞"].indexOf(convertNum(num2)) < 0
-                  ? `$${convertNum(num2)}`
-                  : `${convertNum(num2)}`}
+               {["Omitted", "∞"].indexOf(convertLargeNum(num2)) < 0
+                  ? `$${convertLargeNum(num2)}`
+                  : `${convertLargeNum(num2)}`}
             </p>
          </div>
          <div

@@ -13,7 +13,7 @@ import {
    changePage,
    changePerPage,
 } from "store/coinList/actions";
-import { CoinListCoin, Loading } from "components";
+import { CoinListCoin } from "components";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -26,7 +26,7 @@ import {
 import "./coinList.style.scss";
 
 const CoinList: FC = () => {
-   const { data, isLoading, marketCap, top, page, perPage } = useSelector(
+   const { data, marketCap, top, page, perPage } = useSelector(
       (state: RootState) => state.coinList
    );
 
@@ -170,7 +170,6 @@ const CoinList: FC = () => {
                ))}
             </tbody>
          </table>
-         {isLoading && <Loading />}
       </div>
    );
 };
