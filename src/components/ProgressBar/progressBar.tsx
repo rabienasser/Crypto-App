@@ -49,18 +49,21 @@ const ProgressBar: FC<ProgressBarProps> = ({ num1, num2, idx }) => {
       ];
    };
 
+   const largeNum1 = convertLargeNum(num1);
+   const largeNum2 = convertLargeNum(num2);
+
    return (
       <div className="progress-bar-div">
          <div className="coin-stats">
             <p style={{ color: `${generateColors(idx).color1}` }}>
-               {["Omitted", "∞"].indexOf(convertLargeNum(num1)) < 0
-                  ? `$${convertLargeNum(num1)}`
-                  : `${convertLargeNum(num1)}`}
+               {["Omitted", "∞"].indexOf(largeNum1) < 0
+                  ? `$${largeNum1}`
+                  : `${largeNum1}`}
             </p>
             <p style={{ color: `${generateColors(idx).color2}` }}>
-               {["Omitted", "∞"].indexOf(convertLargeNum(num2)) < 0
-                  ? `$${convertLargeNum(num2)}`
-                  : `${convertLargeNum(num2)}`}
+               {["Omitted", "∞"].indexOf(largeNum2) < 0
+                  ? `$${largeNum2}`
+                  : `${largeNum2}`}
             </p>
          </div>
          <div

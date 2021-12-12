@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { RootState } from "store";
 import { useSelector } from "react-redux";
-import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fab } from "@fortawesome/free-brands-svg-icons";
+import { RootState } from "store";
+import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
 import "./globalDataBar.style.scss";
 
 library.add(fab);

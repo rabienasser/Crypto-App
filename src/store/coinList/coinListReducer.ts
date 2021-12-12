@@ -1,3 +1,4 @@
+import { RootState } from 'store';
 import { CoinList, CoinListAction, Coin, SET_BOTTOM_OR_TOP_COINS, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_ERROR, SET_LOADING, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CHANGE_PAGE, CHANGE_PER_PAGE } from './types'
 
 interface CoinListState {
@@ -124,5 +125,8 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
         default: return state
     }
 }
+
+export const getIsAppLoading = (state: RootState) =>
+state.coinList.isLoading || state.globalData.isLoading;
 
 export default coinListReducer

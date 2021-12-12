@@ -1,4 +1,13 @@
-import React, { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+   faSort,
+   faFilter,
+   faCaretRight,
+   faCaretLeft,
+   faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
 import { RootState } from "store/index";
 import { Coin } from "store/coinList/types";
 import {
@@ -14,15 +23,6 @@ import {
    changePerPage,
 } from "store/coinList/actions";
 import { CoinListCoin } from "components";
-import { useSelector, useDispatch } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-   faSort,
-   faFilter,
-   faCaretRight,
-   faCaretLeft,
-   faCaretDown,
-} from "@fortawesome/free-solid-svg-icons";
 import "./coinList.style.scss";
 
 const CoinList: FC = () => {
