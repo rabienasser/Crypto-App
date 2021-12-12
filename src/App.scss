@@ -1,5 +1,7 @@
 $dark-background: #191b1f;
 $grey-background: #1f2128;
+$light-grey: #383b46;
+$third-color: #dbc473;
 $neon-green: #06d921;
 $neon-red: #fe1040;
 
@@ -27,6 +29,7 @@ ul {
 }
 
 .home-container {
+   position: relative;
    width: 78%;
    padding: 30px 0;
    margin: auto;

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { ProgressBar } from "components";
-import { Coin } from "store/coinList/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { ProgressBar } from "components";
+import { Coin } from "store/coinList/types";
 
 interface CoinProps {
    coin: Coin;
@@ -16,7 +16,7 @@ const CoinListCoin: FC<CoinProps> = ({ coin, idx }) => {
          <td className="coin-name">
             {" "}
             <img className="coin-image" src={coin.image} alt={coin.name} />{" "}
-            <p>
+            <p className="coin-name">
                {coin.name} ({coin.symbol.toUpperCase()})
             </p>
          </td>

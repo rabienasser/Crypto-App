@@ -1,4 +1,13 @@
-import React, { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+   faSort,
+   faFilter,
+   faCaretRight,
+   faCaretLeft,
+   faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
 import { RootState } from "store/index";
 import { Coin } from "store/coinList/types";
 import {
@@ -13,20 +22,11 @@ import {
    changePage,
    changePerPage,
 } from "store/coinList/actions";
-import { CoinListCoin, Loading } from "components";
-import { useSelector, useDispatch } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-   faSort,
-   faFilter,
-   faCaretRight,
-   faCaretLeft,
-   faCaretDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { CoinListCoin } from "components";
 import "./coinList.style.scss";
 
 const CoinList: FC = () => {
-   const { data, isLoading, marketCap, top, page, perPage } = useSelector(
+   const { data, marketCap, top, page, perPage } = useSelector(
       (state: RootState) => state.coinList
    );
 
@@ -170,7 +170,6 @@ const CoinList: FC = () => {
                ))}
             </tbody>
          </table>
-         {isLoading && <Loading />}
       </div>
    );
 };

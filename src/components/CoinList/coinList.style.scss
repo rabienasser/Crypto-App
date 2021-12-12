@@ -13,7 +13,7 @@
       border-collapse: collapse;
 
       thead {
-         border-bottom: 1px solid grey;
+         border-bottom: 1px solid $light-grey;
       }
 
       th {
@@ -24,6 +24,15 @@
       td {
          text-align: left;
          padding: 28px 5px;
+
+         .coin-name {
+            cursor: pointer;
+            transition: color 0.2s ease;
+
+            &:hover {
+               color: $third-color;
+            }
+         }
 
          .coin-image {
             height: 34px;
@@ -57,7 +66,7 @@
 
 .coin-list-coin {
    &:not(:last-child) {
-      border-bottom: 1px solid grey;
+      border-bottom: 1px solid $light-grey;
    }
 
    &:hover {
@@ -111,7 +120,7 @@
             background: $dark-background;
             top: 100%;
             right: 0%;
-            border: 1px solid grey;
+            border: 1px solid $light-grey;
             border-radius: 5px;
 
             li {
