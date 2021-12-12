@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { HomePage, CoinPage, Portfolio } from "pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HomePage, CoinPage, Portfolio } from "pages";
 import "App.scss";
 
 const App: FC = () => {

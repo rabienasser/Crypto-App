@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { ProgressBar } from "components";
-import { Coin } from "store/coinList/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { ProgressBar } from "components";
+import { Coin } from "store/coinList/types";
 
 interface CoinProps {
    coin: Coin;
