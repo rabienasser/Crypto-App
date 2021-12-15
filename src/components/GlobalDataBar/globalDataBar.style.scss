@@ -1,16 +1,17 @@
 @import "App.scss";
 
 .global-data {
-   width: 75%;
+   width: 65%;
    background: $dark-background;
    padding: 15px 0;
    margin: 0 auto 30px;
-   border-radius: 20px;
+   border-bottom-left-radius: 20px;
+   border-bottom-right-radius: 20px;
    font-size: 12px;
 
    ul {
       @include flexCenter($flexDirection: row);
-      justify-content: space-evenly;
+      justify-content: space-around;
 
       li {
          display: flex;
