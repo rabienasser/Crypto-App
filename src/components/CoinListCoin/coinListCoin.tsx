@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { ProgressBar } from "components";
@@ -16,9 +17,9 @@ const CoinListCoin: FC<CoinProps> = ({ coin, idx }) => {
          <td className="coin-name">
             {" "}
             <img className="coin-image" src={coin.image} alt={coin.name} />{" "}
-            <p className="coin-name">
+            <Link to={`/coins/${coin.name}`}>
                {coin.name} ({coin.symbol.toUpperCase()})
-            </p>
+            </Link>
          </td>
          <td>
             $

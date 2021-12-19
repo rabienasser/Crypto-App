@@ -19,20 +19,15 @@
       th {
          text-align: left;
          padding: 0px 16px 8px;
+
+         .th-flex {
+            display: flex;
+         }
       }
 
       td {
          text-align: left;
          padding: 28px 5px;
-
-         .coin-name {
-            cursor: pointer;
-            transition: color 0.2s ease;
-
-            &:hover {
-               color: $third-color;
-            }
-         }
 
          .coin-image {
             height: 34px;
@@ -43,6 +38,17 @@
          .caret {
             font-size: 15px;
             margin-right: 5px;
+         }
+
+         a {
+            cursor: pointer;
+            margin: auto 0;
+            color: white;
+            transition: color 0.2s ease;
+
+            &:hover {
+               color: $third-color;
+            }
          }
       }
    }
