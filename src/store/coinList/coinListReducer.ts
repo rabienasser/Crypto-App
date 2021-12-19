@@ -139,4 +139,12 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
 export const getIsAppLoading = (state: RootState) =>
 state.coinList.isLoading || state.globalData.isLoading;
 
+export const btc = (state: RootState) => {
+    return state.coinList.data?.find(coin => coin.id === 'bitcoin')
+}
+
+export const eth = (state: RootState) => {
+    return state.coinList.data?.find(coin => coin.id === 'ethereum')
+}
+
 export default coinListReducer

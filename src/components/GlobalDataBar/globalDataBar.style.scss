@@ -34,6 +34,14 @@
                background: $third-color;
             }
          }
+
+         .coin-stats {
+            display: flex;
+
+            p {
+               margin: auto;
+            }
+         }
       }
 
       .dot {
@@ -46,14 +54,8 @@
 
       .icon {
          margin-right: 5px;
-      }
-
-      .btc {
-         color: #f2a900;
-      }
-
-      .eth {
-         color: #3c3c3d;
+         height: 20px;
+         width: 20px;
       }
    }
 }

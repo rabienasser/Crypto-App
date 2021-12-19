@@ -115,49 +115,59 @@ const CoinList: FC = () => {
                <tr>
                   <th>#</th>
                   <th>
-                     Name{" "}
-                     <button
-                        className="filter-btn"
-                        onClick={() => dispatch(sortName())}
-                     >
-                        <FontAwesomeIcon icon={faFilter} />
-                     </button>
+                     <div className="th-flex">
+                        <p>Name</p>
+                        <button
+                           className="filter-btn"
+                           onClick={() => dispatch(sortName())}
+                        >
+                           <FontAwesomeIcon icon={faFilter} />
+                        </button>
+                     </div>
                   </th>
                   <th>
-                     Price{" "}
-                     <button
-                        className="filter-btn"
-                        onClick={() => dispatch(sortPrice())}
-                     >
-                        <FontAwesomeIcon icon={faFilter} />
-                     </button>
+                     <div className="th-flex">
+                        <p>Price</p>
+                        <button
+                           className="filter-btn"
+                           onClick={() => dispatch(sortPrice())}
+                        >
+                           <FontAwesomeIcon icon={faFilter} />
+                        </button>
+                     </div>
                   </th>
                   <th>
-                     1h{" "}
-                     <button
-                        className="filter-btn"
-                        onClick={() => dispatch(sort1Hour())}
-                     >
-                        <FontAwesomeIcon icon={faFilter} />
-                     </button>
+                     <div className="th-flex">
+                        <p>1h</p>
+                        <button
+                           className="filter-btn"
+                           onClick={() => dispatch(sort1Hour())}
+                        >
+                           <FontAwesomeIcon icon={faFilter} />
+                        </button>
+                     </div>
                   </th>
                   <th>
-                     24h{" "}
-                     <button
-                        className="filter-btn"
-                        onClick={() => dispatch(sort24Hour())}
-                     >
-                        <FontAwesomeIcon icon={faFilter} />
-                     </button>
+                     <div className="th-flex">
+                        <p>24h</p>
+                        <button
+                           className="filter-btn"
+                           onClick={() => dispatch(sort24Hour())}
+                        >
+                           <FontAwesomeIcon icon={faFilter} />
+                        </button>
+                     </div>
                   </th>
                   <th>
-                     7d{" "}
-                     <button
-                        className="filter-btn"
-                        onClick={() => dispatch(sort7Day())}
-                     >
-                        <FontAwesomeIcon icon={faFilter} />
-                     </button>
+                     <div className="th-flex">
+                        <p>7d</p>
+                        <button
+                           className="filter-btn"
+                           onClick={() => dispatch(sort7Day())}
+                        >
+                           <FontAwesomeIcon icon={faFilter} />
+                        </button>
+                     </div>
                   </th>
                   <th>24h Vol / Market Cap</th>
                   <th>Circulating / Total Sup</th>
