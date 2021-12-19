@@ -9,8 +9,8 @@ const App: FC = () => {
          <BrowserRouter>
             <Routes>
                <Route path="/" element={<HomePage />} />
-               <Route path="/Coins/:coin" element={<CoinPage />} />
-               <Route path="/Portfolio" element={<Portfolio />} />
+               <Route path="/coins/:coin" element={<CoinPage />} />
+               <Route path="/portfolio" element={<Portfolio />} />
             </Routes>
          </BrowserRouter>
       </div>

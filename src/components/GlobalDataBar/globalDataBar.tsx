@@ -1,9 +1,10 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { RootState } from "store";
+import { btc, eth } from "store/coinList/coinListReducer";
 import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
 import "./globalDataBar.style.scss";
 
@@ -23,6 +24,8 @@ const ProgressBar: FC<ProgressBarProps> = ({ percent }) => {
 
 const GlobalDataBar: FC = () => {
    const { globalData } = useSelector((state: RootState) => state.globalData);
+   const btcImage = useSelector(btc);
+   const ethImage = useSelector(eth);
 
    return (
       <div className="global-data">
@@ -45,24 +48,34 @@ const GlobalDataBar: FC = () => {
                   <b>{convertLargeNum(globalData.total_volume.usd)}</b>
                </li>
                <li>
-                  <div>
-                     <FontAwesomeIcon
-                        className="icon btc"
-                        icon={["fab", "btc"]}
+                  <div className="coin-stats">
+                     <img
+                        className="icon"
+                        src={btcImage?.image}
+                        alt={btcImage?.name}
                      />
-                     <b>{globalData.market_cap_percentage.btc.toFixed(0)}</b>%
+                     <p>
+                        <b>
+                           {globalData.market_cap_percentage.btc.toFixed(0)}%
+                        </b>
+                     </p>
                   </div>
                   <ProgressBar
                      percent={globalData.market_cap_percentage.btc.toFixed(0)}
                   />
                </li>
                <li>
-                  <div>
-                     <FontAwesomeIcon
-                        className="icon eth"
-                        icon={["fab", "ethereum"]}
+                  <div className="coin-stats">
+                     <img
+                        className="icon"
+                        src={ethImage?.image}
+                        alt={ethImage?.name}
                      />
-                     <b>{globalData.market_cap_percentage.eth.toFixed(0)}</b>%
+                     <p>
+                        <b>
+                           {globalData.market_cap_percentage.eth.toFixed(0)} %
+                        </b>
+                     </p>
                   </div>
                   <ProgressBar
                      percent={globalData.market_cap_percentage.eth.toFixed(0)}
