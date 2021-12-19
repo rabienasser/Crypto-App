@@ -9,7 +9,6 @@ export const searchCoins = (inputValue: string): ThunkAction<void, RootState, nu
         const res = await fetch(`https://crypto-app-server.herokuapp.com/coins/${inputValue}`)
 
         const data = await res.json()
-        console.log(data)
 
         dispatch({
             type: SEARCH_COINS,

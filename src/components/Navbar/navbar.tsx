@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { debounce } from "lodash";
 import { NavLink } from "react-router-dom";
@@ -10,6 +11,9 @@ import "./navbar.style.scss";
 
 const Navbar: FC = () => {
    const [value, setValue] = useState("");
+   const [isSearchList, setSearchList] = useState(false);
+
+   const { pathname } = useLocation();
 
    const dispatch = useDispatch();
    const dispatchSearchCoins = () => {
@@ -20,8 +24,33 @@ const Navbar: FC = () => {
 
    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
       setValue(e.currentTarget.value);
-      debounce(dispatchSearchCoins, 2000)();
+      if (value !== "") {
+         debounce(dispatchSearchCoins)();
+      }
    };
+
+   const closeSearchList = () => {
+      setSearchList(false);
+   };
+
+   useEffect(() => {
+      if (value === "") {
+         setSearchList(false);
+      } else {
+         setSearchList(true);
+      }
+   }, [value]);
+
+   useEffect(() => {
+      document.addEventListener("click", closeSearchList);
+      return () => {
+         document.removeEventListener("click", closeSearchList);
+      };
+   }, []);
+
+   useEffect(() => {
+      setValue("");
+   }, [pathname]);
 
    return (
       <nav>
@@ -50,11 +79,15 @@ const Navbar: FC = () => {
                   value={value}
                   onChange={handleChange}
                />
-               <ul>
-                  {/* {coins?.map((coin) => (
-                     <li>{coin.name}</li>
-                  ))} */}
-               </ul>
+               {isSearchList && (
+                  <ul>
+                     {coins?.map((coin) => (
+                        <Link to={`coins/${coin.name}`} key={coin.name}>
+                           {coin.name}
+                        </Link>
+                     ))}
+                  </ul>
+               )}
             </div>
          </div>
       </nav>

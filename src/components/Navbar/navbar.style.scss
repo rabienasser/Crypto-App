@@ -25,6 +25,7 @@ nav {
    .right-nav {
       .input {
          display: flex;
+         position: relative;
 
          input {
             background: $light-grey;
@@ -49,6 +50,26 @@ nav {
             padding: 12px 8px;
             border-bottom-left-radius: 10px;
             border-top-left-radius: 10px;
+         }
+
+         ul {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0%;
+            z-index: 1;
+            padding: 5px 0;
+            background: $dark-background;
+
+            a {
+               cursor: pointer;
+               padding: 7px 15px;
+
+               &:hover {
+                  background: $light-grey;
+               }
+            }
          }
       }
    }
