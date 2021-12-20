@@ -4,7 +4,7 @@ import "./loading.style.scss";
 const Loading: FC = () => {
    return (
       <div className="loading">
-         <div className="dot-falling"></div>;
+         <div className="dot-falling"></div>
       </div>
    );
 };

@@ -58,55 +58,65 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
                 error: true
             }
         case SORT_PRICE:
-            if (state.sorted){
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.current_price - b.current_price)
-            } else {
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.current_price - a.current_price)
-            }
+             sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => {
+                if(state.sorted){
+                    return  a.current_price - b.current_price
+                } else {
+                   return b.current_price - a.current_price
+                }
+            })
             return {
                 ...state,
                 sorted: !state.sorted,
                 data: sortedData
             }
         case SORT_NAME:
-            if (state.sorted){
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.name.localeCompare(b.name))
-            } else {
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.name.localeCompare(a.name))
-            }
+            sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => {
+                if(state.sorted) {
+                    return a.name.localeCompare(b.name)
+                } else {
+                    return b.name.localeCompare(a.name)
+                }
+            })
             return {
                 ...state,
                 sorted: !state.sorted,
                 data: sortedData
             }
         case SORT_1_HOUR:
-            if (state.sorted){
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.price_change_percentage_1h_in_currency - b.price_change_percentage_1h_in_currency)
-            } else {
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.price_change_percentage_1h_in_currency - a.price_change_percentage_1h_in_currency)
-            }
+            sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => {
+                if(state.sorted){
+                    return  a.price_change_percentage_1h_in_currency - b.price_change_percentage_1h_in_currency
+                } else {
+                   return b.price_change_percentage_1h_in_currency - a.price_change_percentage_1h_in_currency
+                }
+            })
             return {
                 ...state,
                 sorted: !state.sorted,
                 data: sortedData
             }
         case SORT_24_HOUR:
-            if (state.sorted){
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.price_change_percentage_24h_in_currency - b.price_change_percentage_24h_in_currency)
-            } else {
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.price_change_percentage_24h_in_currency - a.price_change_percentage_24h_in_currency)
-            }
+            sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => {
+                if(state.sorted){
+                    return  a.price_change_percentage_24h_in_currency - b.price_change_percentage_24h_in_currency
+                } else {
+                   return b.price_change_percentage_24h_in_currency - a.price_change_percentage_24h_in_currency
+                }
+            })
             return {
                 ...state,
                 sorted: !state.sorted,
                 data: sortedData
             }
         case SORT_7_DAY:
-            if (state.sorted){
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => a.price_change_percentage_7d_in_currency - b.price_change_percentage_7d_in_currency)
-            } else {
-                sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => b.price_change_percentage_7d_in_currency - a.price_change_percentage_7d_in_currency)
-            }
+            sortedData = [...state.data!]?.sort((a: Coin, b: Coin) => {
+                if(state.sorted){
+                    return  a.price_change_percentage_7d_in_currency - b.price_change_percentage_7d_in_currency
+                } else {
+                   return b.price_change_percentage_7d_in_currency - a.price_change_percentage_7d_in_currency
+                }
+            })
             return {
                 ...state,
                 sorted: !state.sorted,
