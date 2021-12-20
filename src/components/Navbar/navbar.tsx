@@ -63,7 +63,7 @@ const Navbar: FC = () => {
             </NavLink>
             <NavLink
                className={({ isActive }) => (isActive ? "active" : "")}
-               to="/Portfolio"
+               to="/portfolio"
             >
                Portfolio
             </NavLink>
