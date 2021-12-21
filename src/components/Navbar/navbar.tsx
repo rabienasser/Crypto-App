@@ -4,14 +4,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { debounce } from "lodash";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { searchCoins } from "store/searchCoins/actions";
+import { faSearch, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { RootState } from "store";
+import { searchCoins } from "store/searchCoins/actions";
+import { getCoinsByMarketCap, getCoinsByVolume } from "store/coinList/actions";
+import { CurrencyListItem } from "components";
+import { showCurrencySymbol } from "utils/showCurrencySymbol";
 import "./navbar.style.scss";
 
 const Navbar: FC = () => {
    const [value, setValue] = useState("");
    const [isSearchList, setSearchList] = useState(false);
+   const [isCurrencyList, setCurrencyList] = useState(false);
 
    const { pathname } = useLocation();
 
@@ -21,6 +25,9 @@ const Navbar: FC = () => {
    };
 
    const { coins } = useSelector((state: RootState) => state.searchCoins);
+   const { currency, marketCap, top } = useSelector(
+      (state: RootState) => state.coinList
+   );
 
    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
       setValue(e.currentTarget.value);
@@ -29,9 +36,24 @@ const Navbar: FC = () => {
       }
    };
 
+   const handleCurrencyList = () => {
+      setCurrencyList(!isCurrencyList);
+   };
+
    const closeSearchList = () => {
       setSearchList(false);
    };
+
+   const closeCoinList = () => {
+      setCurrencyList(false);
+   };
+
+   useEffect(() => {
+      document.addEventListener("click", closeSearchList);
+      return () => {
+         document.removeEventListener("click", closeSearchList);
+      };
+   }, []);
 
    useEffect(() => {
       if (value === "") {
@@ -42,15 +64,14 @@ const Navbar: FC = () => {
    }, [value]);
 
    useEffect(() => {
-      document.addEventListener("click", closeSearchList);
-      return () => {
-         document.removeEventListener("click", closeSearchList);
-      };
-   }, []);
-
-   useEffect(() => {
       setValue("");
    }, [pathname]);
+
+   useEffect(() => {
+      marketCap
+         ? dispatch(getCoinsByMarketCap(top))
+         : dispatch(getCoinsByVolume(top));
+   }, [currency]);
 
    return (
       <nav>
@@ -86,6 +107,43 @@ const Navbar: FC = () => {
                            {coin.name}
                         </Link>
                      ))}
+                  </ul>
+               )}
+            </div>
+            <div className="currency">
+               <button className="active" onClick={handleCurrencyList}>
+                  <div className="currency-symbol">
+                     <p>{showCurrencySymbol(currency)}</p>
+                  </div>
+                  <p>{currency.toUpperCase()}</p>
+                  <FontAwesomeIcon className="icon" icon={faCaretDown} />
+               </button>
+               {isCurrencyList && (
+                  <ul>
+                     <CurrencyListItem
+                        symbol="$"
+                        code="USD"
+                        query="usd"
+                        closeCoinList={closeCoinList}
+                     />
+                     <CurrencyListItem
+                        symbol="£"
+                        code="GBP"
+                        query="gbp"
+                        closeCoinList={closeCoinList}
+                     />
+                     <CurrencyListItem
+                        symbol="€"
+                        code="EUR"
+                        query="eur"
+                        closeCoinList={closeCoinList}
+                     />
+                     <CurrencyListItem
+                        symbol="¥"
+                        code="JP¥"
+                        query="jpy"
+                        closeCoinList={closeCoinList}
+                     />
                   </ul>
                )}
             </div>
