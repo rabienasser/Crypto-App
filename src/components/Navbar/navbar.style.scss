@@ -9,6 +9,31 @@ nav {
       width: 90%;
    }
 
+   .active {
+      background: $light-grey;
+   }
+
+   ul {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0%;
+      z-index: 1;
+      padding: 5px 0;
+      background: $dark-background;
+
+      a,
+      li {
+         cursor: pointer;
+         padding: 7px 15px;
+
+         &:hover {
+            background: $light-grey;
+         }
+      }
+   }
+
    .left-nav {
       a {
          color: white;
@@ -16,13 +41,10 @@ nav {
          border-radius: 10px;
          margin-right: 10px;
       }
-
-      .active {
-         background: $light-grey;
-      }
    }
 
    .right-nav {
+      display: flex;
       .input {
          display: flex;
          position: relative;
@@ -51,24 +73,57 @@ nav {
             border-bottom-left-radius: 10px;
             border-top-left-radius: 10px;
          }
+      }
+
+      .currency {
+         margin: auto;
+         position: relative;
+
+         button {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-left: 15px;
+            color: white;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+
+            p {
+               font-weight: bold;
+               margin: 0 5px;
+            }
+
+            .icon {
+               color: $neon-green;
+            }
+         }
 
          ul {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            left: 0%;
-            z-index: 1;
-            padding: 5px 0;
-            background: $dark-background;
+            li {
+               display: flex;
 
-            a {
-               cursor: pointer;
-               padding: 7px 15px;
-
-               &:hover {
-                  background: $light-grey;
+               p {
+                  margin: auto;
                }
+
+               .list-symbol {
+                  background: $grey-background;
+                  margin-right: 5px;
+               }
+            }
+         }
+
+         .currency-symbol {
+            display: grid;
+            background: $dark-background;
+            border-radius: 50%;
+            height: 25px;
+            width: 25px;
+
+            p {
+               color: $neon-green;
+               margin: auto;
             }
          }
       }

@@ -1,5 +1,5 @@
 import { RootState } from 'store';
-import { CoinList, CoinListAction, Coin, SET_BOTTOM_OR_TOP_COINS, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_ERROR, SET_LOADING, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CHANGE_PAGE, CHANGE_PER_PAGE } from './types'
+import { CoinList, CoinListAction, Coin, SET_BOTTOM_OR_TOP_COINS, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_ERROR, SET_LOADING, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CHANGE_PAGE, CHANGE_PER_PAGE, CHANGE_CURRENCY } from './types'
 
 interface CoinListState {
     data?: CoinList | null 
@@ -10,6 +10,7 @@ interface CoinListState {
     top: boolean,
     page: number,
     perPage: number
+    currency: string
 }
 
 const initialState = {
@@ -20,7 +21,8 @@ const initialState = {
     marketCap: true,
     top: true,
     page: 1,
-    perPage: 50
+    perPage: 50,
+    currency: 'usd'
 }
 
 const coinListReducer = (state: CoinListState = initialState, action: CoinListAction): CoinListState => {
@@ -132,6 +134,11 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
                 ...state,
                 perPage: action.payload
             }
+            case CHANGE_CURRENCY:
+                return {
+                    ...state,
+                    currency: action.payload
+                }
         default: return state
     }
 }

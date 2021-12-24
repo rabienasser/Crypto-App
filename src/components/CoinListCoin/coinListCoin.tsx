@@ -1,9 +1,12 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { ProgressBar } from "components";
 import { Coin } from "store/coinList/types";
+import { RootState } from "store";
+import { showCurrencySymbol } from "utils/showCurrencySymbol";
 
 interface CoinProps {
    coin: Coin;
@@ -11,6 +14,7 @@ interface CoinProps {
 }
 
 const CoinListCoin: FC<CoinProps> = ({ coin, idx }) => {
+   const { currency } = useSelector((state: RootState) => state.coinList);
    return (
       <tr className="coin-list-coin">
          <td>{idx + 1}</td>
@@ -22,7 +26,7 @@ const CoinListCoin: FC<CoinProps> = ({ coin, idx }) => {
             </Link>
          </td>
          <td>
-            $
+            {showCurrencySymbol(currency)}
             {coin.current_price?.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
          </td>
          <td
