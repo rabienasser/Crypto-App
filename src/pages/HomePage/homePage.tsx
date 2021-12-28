@@ -27,9 +27,13 @@ const HomePage: FC = () => {
       }
    }, [top, page]);
 
+   const homePageHeight = isLoading
+      ? { height: "100vh" }
+      : { height: "fit-content" };
+
    return (
       <div className="home-page">
-         <div className="home-container">
+         <div className="home-container" style={homePageHeight}>
             {isLoading && <Loading />}
             <GlobalDataBar />
             <CoinList />

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { ProgressBar } from "components";
+import { ProgressBar, CoinChart } from "components";
 import { Coin } from "store/coinList/types";
 import { RootState } from "store";
 import { showCurrencySymbol } from "utils/showCurrencySymbol";
@@ -19,11 +19,12 @@ const CoinListCoin: FC<CoinProps> = ({ coin, idx }) => {
       <tr className="coin-list-coin">
          <td>{idx + 1}</td>
          <td className="coin-name">
-            {" "}
-            <img className="coin-image" src={coin.image} alt={coin.name} />{" "}
-            <Link to={`/coins/${coin.name}`}>
-               {coin.name} ({coin.symbol.toUpperCase()})
-            </Link>
+            <div>
+               <img className="coin-image" src={coin.image} alt={coin.name} />
+               <Link to={`/coins/${coin.name}`}>
+                  {coin.name} ({coin.symbol.toUpperCase()})
+               </Link>
+            </div>
          </td>
          <td>
             {showCurrencySymbol(currency)}
@@ -103,7 +104,7 @@ const CoinListCoin: FC<CoinProps> = ({ coin, idx }) => {
             />
          </td>
          <td>
-            <h1>GRAPH</h1>
+            <CoinChart data={coin.sparkline_in_7d.price} />
          </td>
       </tr>
    );
