@@ -29,7 +29,7 @@ const HomePage: FC = () => {
 
    return (
       <div className="home-page">
-         <div className="home-container">
+         <div className={`${isLoading && "home-page-loading"} home-container`}>
             {isLoading && <Loading />}
             <GlobalDataBar />
             <CoinList />

@@ -53,11 +53,16 @@
    }
 }
 
-.coin-name,
 .percent-change {
    display: flex;
    p {
       margin: auto 0;
+   }
+}
+
+.coin-name {
+   div {
+      display: flex;
    }
 }
 
