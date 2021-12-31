@@ -22,7 +22,7 @@ const initialState = {
     top: true,
     page: 1,
     perPage: 50,
-    currency: 'usd'
+    currency: 'usd',
 }
 
 const coinListReducer = (state: CoinListState = initialState, action: CoinListAction): CoinListState => {
@@ -39,7 +39,7 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
                 ...state,
                 isLoading: false,
                 data: action.payload,
-                marketCap: true
+                marketCap: true,
             }
         case GET_COINS_BY_VOLUME:
             return {
@@ -145,13 +145,5 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
 
 export const getIsAppLoading = (state: RootState) =>
 state.coinList.isLoading || state.globalData.isLoading;
-
-export const btc = (state: RootState) => {
-    return state.coinList.data?.find(coin => coin.id === 'bitcoin')
-}
-
-export const eth = (state: RootState) => {
-    return state.coinList.data?.find(coin => coin.id === 'ethereum')
-}
 
 export default coinListReducer

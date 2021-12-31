@@ -1,6 +1,8 @@
 export const GET_GLOBAL_DATA = 'GET_GLOBAL_DATA'
 export const SET_GLOBAL_LOADING = 'SET_GLOBAL_LOADING'
 export const SET_ERROR = 'SET_ERROR'
+export const GET_BTC = 'GET_BTC'
+export const GET_ETH = 'GET_ETH'
 
 export type GlobalData = {
     active_cryptocurrencies: number
@@ -14,9 +16,15 @@ export type GlobalData = {
         btc: number
         eth: number
         usd: number
+        gbp: number
+        eur: number
+        jpy: number
     }
     total_volume: {
         usd: number
+        gbp: number
+        eur: number
+        jpy: number
     }
 
 }
@@ -24,6 +32,16 @@ export type GlobalData = {
 interface GetGlobalData {
     type: typeof GET_GLOBAL_DATA
     payload: GlobalData
+}
+
+interface GetBTC {
+    type: typeof GET_BTC
+    payload: string
+}
+
+interface GetETH {
+    type: typeof GET_ETH
+    payload: string
 }
 
 interface SetLoading {
@@ -34,4 +52,4 @@ interface SetError {
     type: typeof SET_ERROR
 }
 
-export type GlobalDataAction = GetGlobalData | SetLoading | SetError
+export type GlobalDataAction = GetGlobalData | SetLoading | SetError | GetBTC | GetETH

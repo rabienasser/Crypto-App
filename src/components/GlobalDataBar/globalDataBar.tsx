@@ -1,13 +1,10 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
 import { RootState } from "store";
-import { btc, eth } from "store/coinList/coinListReducer";
 import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
+import { showCurrencySymbol } from "utils/showCurrencySymbol";
+import { globalMarketCap, globalVolume } from "utils/globalDataCurrency";
 import "./globalDataBar.style.scss";
-
-library.add(fab);
 
 interface ProgressBarProps {
    percent: string;
@@ -22,9 +19,10 @@ const ProgressBar: FC<ProgressBarProps> = ({ percent }) => {
 };
 
 const GlobalDataBar: FC = () => {
-   const { globalData } = useSelector((state: RootState) => state.globalData);
-   const btcImage = useSelector(btc);
-   const ethImage = useSelector(eth);
+   const { globalData, btc, eth } = useSelector(
+      (state: RootState) => state.globalData
+   );
+   const { currency } = useSelector((state: RootState) => state.coinList);
 
    return (
       <div className="global-data">
@@ -39,20 +37,20 @@ const GlobalDataBar: FC = () => {
                   <b>{globalData.markets}</b>
                </li>
                <li>
-                  <div className="dot"></div>$
-                  <b>{convertLargeNum(globalData.total_market_cap.usd)}</b>
+                  <div className="dot"></div>
+                  {showCurrencySymbol(currency)}
+                  <b>
+                     {convertLargeNum(globalMarketCap(currency, globalData))}
+                  </b>
                </li>
                <li>
-                  <div className="dot"></div>$
-                  <b>{convertLargeNum(globalData.total_volume.usd)}</b>
+                  <div className="dot"></div>
+                  {showCurrencySymbol(currency)}
+                  <b>{convertLargeNum(globalVolume(currency, globalData))}</b>
                </li>
                <li>
                   <div className="coin-stats">
-                     <img
-                        className="icon"
-                        src={btcImage?.image}
-                        alt={btcImage?.name}
-                     />
+                     <img className="icon" src={btc} alt="Bitcoin" />
                      <p>
                         <b>
                            {globalData.market_cap_percentage.btc.toFixed(0)}%
@@ -65,14 +63,10 @@ const GlobalDataBar: FC = () => {
                </li>
                <li>
                   <div className="coin-stats">
-                     <img
-                        className="icon"
-                        src={ethImage?.image}
-                        alt={ethImage?.name}
-                     />
+                     <img className="icon" src={eth} alt="Ethereum" />
                      <p>
                         <b>
-                           {globalData.market_cap_percentage.eth.toFixed(0)} %
+                           {globalData.market_cap_percentage.eth.toFixed(0)}%
                         </b>
                      </p>
                   </div>

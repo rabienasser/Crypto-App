@@ -1,16 +1,20 @@
-import {GET_GLOBAL_DATA, SET_GLOBAL_LOADING, SET_ERROR, GlobalDataAction, GlobalData} from './types'
+import {GET_GLOBAL_DATA, SET_GLOBAL_LOADING, SET_ERROR, GET_BTC, GET_ETH, GlobalDataAction, GlobalData} from './types'
 
 
 interface GlobalDataState {
     globalData?: GlobalData | null
     isLoading: boolean
     error: boolean
+    btc: string
+    eth: string
 }
 
 const initialState = {
     globalData: null,
     isLoading: false,
     error: false,
+    btc: '',
+    eth: ''
 }
 
 const globalDataReducer = (state: GlobalDataState = initialState, action: GlobalDataAction) => {
@@ -31,6 +35,16 @@ const globalDataReducer = (state: GlobalDataState = initialState, action: Global
                 ...state,
                 isLoading: false,
                 error: true
+            }
+        case GET_BTC:
+            return {
+                ...state,
+                btc: action.payload
+            }
+            case GET_ETH:
+            return {
+                ...state,
+                eth: action.payload
             }
         default: return state
     }

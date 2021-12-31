@@ -1,6 +1,9 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { RootState } from "store";
+import { useSelector } from "react-redux";
 import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
 import { convertNumToPercent } from "utils/numberConversions/convertNumToPercent";
+import { showCurrencySymbol } from "utils/showCurrencySymbol";
 import "./progressBar.style.scss";
 
 interface ProgressBarProps {
@@ -41,6 +44,7 @@ const progressBarColors = {
 };
 
 const ProgressBar: FC<ProgressBarProps> = ({ num1, num2, idx }) => {
+   const { currency } = useSelector((state: RootState) => state.coinList);
    let progressPercent = num1 / num2;
 
    const generateColors = (idx: number) => {
@@ -57,12 +61,12 @@ const ProgressBar: FC<ProgressBarProps> = ({ num1, num2, idx }) => {
          <div className="coin-stats">
             <p style={{ color: `${generateColors(idx).color1}` }}>
                {["Omitted", "∞"].indexOf(largeNum1) < 0
-                  ? `$${largeNum1}`
+                  ? `${showCurrencySymbol(currency)}${largeNum1}`
                   : `${largeNum1}`}
             </p>
             <p style={{ color: `${generateColors(idx).color2}` }}>
                {["Omitted", "∞"].indexOf(largeNum2) < 0
-                  ? `$${largeNum2}`
+                  ? `${showCurrencySymbol(currency)}${largeNum2}`
                   : `${largeNum2}`}
             </p>
          </div>

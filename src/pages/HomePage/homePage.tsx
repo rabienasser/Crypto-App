@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CoinList, GlobalDataBar, Loading } from "components";
 import { getCoinsByMarketCap, getCoinsByVolume } from "store/coinList/actions";
