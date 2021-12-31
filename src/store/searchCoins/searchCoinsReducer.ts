@@ -2,23 +2,23 @@ import {SEARCH_COINS, SET_LOADING, SET_ERROR, SearchCoinsAction, Coins} from './
 
 interface CoinState {
     coins?: Coins | null
-    isLoading: boolean
+    // isLoading: boolean
     error: boolean
 }
 
 const initialState = {
     coins: null,
-    isLoading: false,
+    // isLoading: false,
     error: false,
 }
 
 const searchCoinsReducer = (state: CoinState = initialState, action: SearchCoinsAction) => {
     switch(action.type) {
-        case SET_LOADING:
-            return {
-                ...state,
-                isLoading: true
-            }
+        // case SET_LOADING:
+        //     return {
+        //         ...state,
+        //         isLoading: true
+        //     }
         case SEARCH_COINS:
             return {
                 ...state,

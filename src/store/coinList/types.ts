@@ -1,7 +1,7 @@
 export const SET_BOTTOM_OR_TOP_COINS = 'SET_BOTTOM_OR_TOP_COINS'
 export const GET_COINS_BY_MARKET_CAP = 'GET_COINS_BY_MARKET_CAP'
 export const GET_COINS_BY_VOLUME = 'GET_COINS_BY_VOLUME'
-export const SET_LOADING = 'SET_LOADING'
+export const SET_COIN_LIST_LOADING = 'SET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
 export const SORT_PRICE = 'SORT_PRICE'
 export const SORT_NAME = 'SORT_NAME'
@@ -65,7 +65,7 @@ interface GetCoinsByVolume {
 }
 
 interface SetLoading {
-    type: typeof SET_LOADING
+    type: typeof SET_COIN_LIST_LOADING
 }
 
 interface SetError {

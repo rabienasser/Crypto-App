@@ -4,7 +4,7 @@ import {SEARCH_COINS, SET_LOADING, SET_ERROR, SearchCoinsAction} from './types'
 
 export const searchCoins = (inputValue: string): ThunkAction<void, RootState, null, SearchCoinsAction> => async (dispatch) => {
     try {
-        dispatch({ type: SET_LOADING })
+        // dispatch({ type: SET_LOADING })
     
         const res = await fetch(`https://crypto-app-server.herokuapp.com/coins/${inputValue}`)
 

@@ -1,4 +1,4 @@
-import {GET_GLOBAL_DATA, SET_LOADING, SET_ERROR, GlobalDataAction, GlobalData} from './types'
+import {GET_GLOBAL_DATA, SET_GLOBAL_LOADING, SET_ERROR, GlobalDataAction, GlobalData} from './types'
 
 
 interface GlobalDataState {
@@ -15,7 +15,7 @@ const initialState = {
 
 const globalDataReducer = (state: GlobalDataState = initialState, action: GlobalDataAction) => {
     switch(action.type) {
-        case SET_LOADING:
+        case SET_GLOBAL_LOADING:
             return {
                 ...state,
                 isLoading: true

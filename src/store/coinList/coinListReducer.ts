@@ -1,5 +1,5 @@
 import { RootState } from 'store';
-import { CoinList, CoinListAction, Coin, SET_BOTTOM_OR_TOP_COINS, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_ERROR, SET_LOADING, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CHANGE_PAGE, CHANGE_PER_PAGE, CHANGE_CURRENCY } from './types'
+import { CoinList, CoinListAction, Coin, SET_BOTTOM_OR_TOP_COINS, GET_COINS_BY_MARKET_CAP, GET_COINS_BY_VOLUME, SET_ERROR, SET_COIN_LIST_LOADING, SORT_PRICE, SORT_NAME, SORT_1_HOUR, SORT_24_HOUR, SORT_7_DAY, CHANGE_PAGE, CHANGE_PER_PAGE, CHANGE_CURRENCY } from './types'
 
 interface CoinListState {
     data?: CoinList | null 
@@ -29,7 +29,7 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
     let sortedData: CoinList;
 
     switch(action.type) {
-        case SET_LOADING:
+        case SET_COIN_LIST_LOADING:
             return {
                 ...state,
                 isLoading: true,

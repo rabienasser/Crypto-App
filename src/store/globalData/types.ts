@@ -1,5 +1,5 @@
 export const GET_GLOBAL_DATA = 'GET_GLOBAL_DATA'
-export const SET_LOADING = 'SET_LOADING'
+export const SET_GLOBAL_LOADING = 'SET_GLOBAL_LOADING'
 export const SET_ERROR = 'SET_ERROR'
 
 export type GlobalData = {
@@ -27,7 +27,7 @@ interface GetGlobalData {
 }
 
 interface SetLoading {
-    type: typeof SET_LOADING
+    type: typeof SET_GLOBAL_LOADING
 }
 
 interface SetError {
