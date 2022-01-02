@@ -144,6 +144,6 @@ const coinListReducer = (state: CoinListState = initialState, action: CoinListAc
 }
 
 export const getIsAppLoading = (state: RootState) =>
-state.coinList.isLoading || state.globalData.isLoading;
+state.coinList.isLoading || state.globalData.isLoading || state.overview.isLoading;
 
 export default coinListReducer

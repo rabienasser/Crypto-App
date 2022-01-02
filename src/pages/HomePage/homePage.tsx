@@ -1,10 +1,11 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CoinList, GlobalDataBar, Loading } from "components";
+import { CoinList, GlobalDataBar, Loading, Overview } from "components";
 import { getCoinsByMarketCap, getCoinsByVolume } from "store/coinList/actions";
 import { RootState } from "store";
 import { getIsAppLoading } from "store/coinList/coinListReducer";
 import { getGlobalData } from "store/globalData/actions";
+import { getOverviewChartData } from "store/overview/actions";
 
 const HomePage: FC = () => {
    const { marketCap, top, page } = useSelector(
@@ -17,6 +18,7 @@ const HomePage: FC = () => {
    useEffect(() => {
       dispatch(getCoinsByMarketCap(top));
       dispatch(getGlobalData());
+      dispatch(getOverviewChartData());
    }, []);
 
    useEffect(() => {
@@ -32,6 +34,7 @@ const HomePage: FC = () => {
          <div className={`${isLoading && "home-page-loading"} home-container`}>
             {isLoading && <Loading />}
             <GlobalDataBar />
+            <Overview />
             <CoinList />
          </div>
       </div>

@@ -4,6 +4,7 @@ export const SET_ERROR = 'SET_ERROR'
 
 export type Coin = {
     name: string
+    id: string
 }
 
 export type Coins = Coin[]
