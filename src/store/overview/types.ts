@@ -5,6 +5,11 @@ export const GET_COIN_PRICE = 'GET_COIN_PRICE'
 export const CHANGE_DAYS = 'CHANGE_DAYS'
 export const CHANGE_COIN = 'CHANGE_COIN'
 
+export interface OverviewData {
+    prices: number[][]
+    total_volumes: number[][]
+}
+
 export interface CurrentPrice {
     usd: number
     gbp: number
@@ -12,7 +17,7 @@ export interface CurrentPrice {
     jpy: number
 }
 
-export type Prices = number[][]
+export type Prices = OverviewData
 
 export type CurrencyPrices = CurrentPrice
 

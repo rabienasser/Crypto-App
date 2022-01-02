@@ -23,7 +23,7 @@ ChartJS.register(
 
 const OverviewCoinChart: FC = () => {
    const { data } = useSelector((state: RootState) => state.overview);
-   const prices = data?.map((arr: number[]) => arr[1]);
+   const prices = data?.prices?.map((arr: number[]) => arr[1]);
 
    const labels = prices?.map((_: any, idx: number) => idx + 1);
 

@@ -17,7 +17,7 @@ export const getOverviewChartData = (): ThunkAction<void, RootState, null, Overv
         dispatch(getCoinPrice())
         dispatch({
             type: GET_OVERVIEW_DATA,
-            payload: data.prices
+            payload: data
         })
 
     } catch(err) {
