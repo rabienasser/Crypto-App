@@ -1,0 +1,119 @@
+@import "App.scss";
+
+.overview {
+   margin: 30px 58px;
+
+   h1 {
+      margin-bottom: 1.5rem;
+   }
+
+   .charts {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+
+      .chart {
+         position: relative;
+         background: $dark-background;
+         border-radius: 5%;
+         padding: 20px;
+         width: 48%;
+
+         .chart-details {
+            position: absolute;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+
+            .price {
+               font-size: 1.8rem;
+            }
+         }
+
+         .coin-showing {
+            div {
+               display: flex;
+               p {
+                  padding: 0 3px;
+               }
+               span {
+                  display: flex;
+
+                  .icon {
+                     margin: auto;
+                     cursor: pointer;
+                     color: $third-color;
+                  }
+               }
+            }
+
+            .search-bar {
+               margin-top: 0.8rem;
+
+               input {
+                  background: $light-grey;
+                  color: white;
+                  border: none;
+                  padding: 5px 10px;
+                  border-radius: 20px;
+
+                  &:focus {
+                     outline: none;
+                  }
+               }
+
+               ul {
+                  display: flex;
+                  flex-direction: column;
+                  z-index: 1;
+                  padding: 5px 0;
+                  background: $dark-background;
+
+                  li {
+                     cursor: pointer;
+                     padding: 5px;
+
+                     &:hover {
+                        background: $light-grey;
+                     }
+                  }
+               }
+            }
+         }
+
+         .line-chart {
+            padding: 50px 20px 10px;
+         }
+      }
+   }
+
+   .chart-settings {
+      background: $dark-background;
+      width: 50%;
+      margin: auto;
+      border-radius: 20px;
+
+      ul {
+         display: flex;
+         justify-content: space-evenly;
+         align-items: center;
+         padding: 15px;
+
+         button {
+            cursor: pointer;
+            background: $light-grey;
+            padding: 7px 15px;
+            border-radius: 20px;
+            color: white;
+            border: none;
+            font-size: 1rem;
+         }
+
+         .selected-button {
+            background: $third-color;
+            color: $dark-background;
+            font-weight: bold;
+         }
+      }
+   }
+}
