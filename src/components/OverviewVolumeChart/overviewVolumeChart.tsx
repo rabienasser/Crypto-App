@@ -69,6 +69,7 @@ const OverviewVolumeChart: FC = () => {
    };
 
    const canvas = document.createElement("canvas");
+   canvas.style.margin = "0";
    const coinData = createCanvas(canvas);
 
    return (

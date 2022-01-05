@@ -7,6 +7,7 @@ import {
    globalMarketCap,
    globalVolume,
 } from "utils/currencyConversions/globalDataCurrency";
+import useWindowSize from "hooks/useWindowSize";
 import "./globalDataBar.style.scss";
 
 interface ProgressBarProps {
@@ -27,30 +28,47 @@ const GlobalDataBar: FC = () => {
    );
    const { currency } = useSelector((state: RootState) => state.coinList);
 
+   const size = useWindowSize();
+
    return (
       <div className="global-data">
          {globalData && (
             <ul>
-               <li>
-                  <p>Coins</p>
-                  <b>{globalData.active_cryptocurrencies}</b>
-               </li>
-               <li>
-                  <p>Exchanges</p>
-                  <b>{globalData.markets}</b>
-               </li>
-               <li>
-                  <div className="dot"></div>
-                  {showCurrencySymbol(currency)}
-                  <b>
-                     {convertLargeNum(globalMarketCap(currency, globalData))}
-                  </b>
-               </li>
-               <li>
-                  <div className="dot"></div>
-                  {showCurrencySymbol(currency)}
-                  <b>{convertLargeNum(globalVolume(currency, globalData))}</b>
-               </li>
+               {size.width! > 400 && (
+                  <li>
+                     <p>Coins</p>
+                     <b>{globalData.active_cryptocurrencies}</b>
+                  </li>
+               )}
+
+               {size.width! > 600 && (
+                  <li>
+                     <p>Exchanges</p>
+                     <b>{globalData.markets}</b>
+                  </li>
+               )}
+
+               {size.width! > 800 && (
+                  <>
+                     <li>
+                        <div className="dot"></div>
+                        {showCurrencySymbol(currency)}
+                        <b>
+                           {convertLargeNum(
+                              globalMarketCap(currency, globalData)
+                           )}
+                        </b>
+                     </li>
+                     <li>
+                        <div className="dot"></div>
+                        {showCurrencySymbol(currency)}
+                        <b>
+                           {convertLargeNum(globalVolume(currency, globalData))}
+                        </b>
+                     </li>
+                  </>
+               )}
+
                <li>
                   <div className="coin-stats">
                      <img className="icon" src={btc} alt="Bitcoin" />
@@ -64,6 +82,7 @@ const GlobalDataBar: FC = () => {
                      percent={globalData.market_cap_percentage.btc.toFixed(0)}
                   />
                </li>
+
                <li>
                   <div className="coin-stats">
                      <img className="icon" src={eth} alt="Ethereum" />
