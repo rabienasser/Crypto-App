@@ -23,6 +23,7 @@ import {
    changePerPage,
 } from "store/coinList/actions";
 import { CoinListCoin } from "components";
+import useWindowSize from "hooks/useWindowSize";
 import "./coinList.style.scss";
 
 const CoinList: FC = () => {
@@ -31,6 +32,7 @@ const CoinList: FC = () => {
    );
 
    const dispatch = useDispatch();
+   const size = useWindowSize();
 
    const [showDropDown, setDropDown] = useState(false);
 
@@ -56,6 +58,7 @@ const CoinList: FC = () => {
                      {top ? "TOP" : "BOT"} {perPage}
                   </h1>
                </div>
+
                <div className="adjust-chart">
                   <h3>BY {marketCap ? "MARKET CAP" : "VOLUME"}</h3>
                   <button
@@ -70,6 +73,7 @@ const CoinList: FC = () => {
                   </button>
                </div>
             </div>
+
             <div className="split">
                <div className="adjust-chart show-coins">
                   <h3>SHOW: {perPage}</h3>
@@ -110,10 +114,12 @@ const CoinList: FC = () => {
                </div>
             </div>
          </div>
+
          <table>
             <thead>
                <tr>
                   <th>#</th>
+
                   <th>
                      <div className="th-flex">
                         <p>Name</p>
@@ -125,6 +131,7 @@ const CoinList: FC = () => {
                         </button>
                      </div>
                   </th>
+
                   <th>
                      <div className="th-flex">
                         <p>Price</p>
@@ -136,42 +143,56 @@ const CoinList: FC = () => {
                         </button>
                      </div>
                   </th>
-                  <th>
-                     <div className="th-flex">
-                        <p>1h</p>
-                        <button
-                           className="filter-btn"
-                           onClick={() => dispatch(sort1Hour())}
-                        >
-                           <FontAwesomeIcon icon={faFilter} />
-                        </button>
-                     </div>
-                  </th>
-                  <th>
-                     <div className="th-flex">
-                        <p>24h</p>
-                        <button
-                           className="filter-btn"
-                           onClick={() => dispatch(sort24Hour())}
-                        >
-                           <FontAwesomeIcon icon={faFilter} />
-                        </button>
-                     </div>
-                  </th>
-                  <th>
-                     <div className="th-flex">
-                        <p>7d</p>
-                        <button
-                           className="filter-btn"
-                           onClick={() => dispatch(sort7Day())}
-                        >
-                           <FontAwesomeIcon icon={faFilter} />
-                        </button>
-                     </div>
-                  </th>
-                  <th>24h Vol / Market Cap</th>
-                  <th>Circulating / Total Sup</th>
-                  <th>Last 7d</th>
+
+                  {size.width! > 400 && (
+                     <th>
+                        <div className="th-flex">
+                           <p>1h</p>
+                           <button
+                              className="filter-btn"
+                              onClick={() => dispatch(sort1Hour())}
+                           >
+                              <FontAwesomeIcon icon={faFilter} />
+                           </button>
+                        </div>
+                     </th>
+                  )}
+
+                  {size.width! > 550 && (
+                     <>
+                        {" "}
+                        <th>
+                           <div className="th-flex">
+                              <p>24h</p>
+                              <button
+                                 className="filter-btn"
+                                 onClick={() => dispatch(sort24Hour())}
+                              >
+                                 <FontAwesomeIcon icon={faFilter} />
+                              </button>
+                           </div>
+                        </th>
+                        <th>
+                           <div className="th-flex">
+                              <p>7d</p>
+                              <button
+                                 className="filter-btn"
+                                 onClick={() => dispatch(sort7Day())}
+                              >
+                                 <FontAwesomeIcon icon={faFilter} />
+                              </button>
+                           </div>
+                        </th>
+                     </>
+                  )}
+
+                  {size.width! > 950 && (
+                     <>
+                        <th>24h Vol / Market Cap</th>
+                        <th>Circulating / Total Sup</th>
+                     </>
+                  )}
+                  {size.width! > 700 && <th>Last 7d</th>}
                </tr>
             </thead>
             <tbody>

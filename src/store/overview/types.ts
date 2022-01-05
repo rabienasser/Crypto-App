@@ -1,7 +1,7 @@
 export const SET_OVERVIEW_LOADING = 'SET_OVERVIEW_LOADING'
 export const GET_OVERVIEW_DATA = 'SET_OVERVIEW_DATA'
 export const SET_OVERVIEW_ERROR = 'SET_OVERVIEW_ERROR'
-export const GET_COIN_PRICE = 'GET_COIN_PRICE'
+export const GET_COIN_MARKET_DATA = 'GET_COIN_MARKET_DATA'
 export const CHANGE_DAYS = 'CHANGE_DAYS'
 export const CHANGE_COIN = 'CHANGE_COIN'
 
@@ -10,16 +10,21 @@ export interface OverviewData {
     total_volumes: number[][]
 }
 
-export interface CurrentPrice {
+export interface Currencies {
     usd: number
     gbp: number
     eur: number
     jpy: number
 }
 
+export interface MarketDataInterface {
+    current_price: Currencies
+    total_volume: Currencies
+}
+
 export type Prices = OverviewData
 
-export type CurrencyPrices = CurrentPrice
+export type MarketData = MarketDataInterface
 
 interface SetOverviewLoading {
     type: typeof SET_OVERVIEW_LOADING
@@ -34,9 +39,9 @@ interface SetOverviewError {
     type: typeof SET_OVERVIEW_ERROR
 }
 
-interface GetCoinPrice {
-    type: typeof GET_COIN_PRICE
-    payload: CurrencyPrices
+interface GetCoinMarketData {
+    type: typeof GET_COIN_MARKET_DATA
+    payload: MarketData
 }
 
 interface ChangeDays {
@@ -49,4 +54,4 @@ interface ChangeCoin {
     payload: string
 }
 
-export type OverviewDataAction = SetOverviewLoading | GetOverviewData | SetOverviewError | GetCoinPrice | ChangeDays | ChangeCoin
+export type OverviewDataAction = SetOverviewLoading | GetOverviewData | SetOverviewError | GetCoinMarketData | ChangeDays | ChangeCoin

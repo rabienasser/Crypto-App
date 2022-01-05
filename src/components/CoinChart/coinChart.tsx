@@ -8,6 +8,7 @@ import {
    Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import useWindowSize from "hooks/useWindowSize";
 
 ChartJS.register(
    CategoryScale,
@@ -21,15 +22,17 @@ interface CoinChartProps {
    data: number[];
 }
 
-const chartStyle = {
-   height: "100%",
-   width: "8rem",
-   margin: "auto",
-};
-
 const CoinChart: FC<CoinChartProps> = ({ data }) => {
+   const size = useWindowSize();
+
    const increasing = data[data.length - 1] - data[0] > 0;
    const labels = data.map((dataPoint) => "");
+
+   const chartStyle = {
+      height: "100%",
+      width: size.width! > 900 ? "8rem" : "6rem",
+      margin: "auto",
+   };
 
    const options = {
       scales: {

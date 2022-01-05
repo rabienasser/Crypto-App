@@ -1,4 +1,4 @@
-import { SET_OVERVIEW_LOADING, GET_OVERVIEW_DATA, SET_OVERVIEW_ERROR, GET_COIN_PRICE, CHANGE_DAYS, CHANGE_COIN, OverviewDataAction, CurrencyPrices, Prices } from './types'
+import { SET_OVERVIEW_LOADING, GET_OVERVIEW_DATA, SET_OVERVIEW_ERROR, GET_COIN_MARKET_DATA, CHANGE_DAYS, CHANGE_COIN, OverviewDataAction, MarketData, Prices } from './types'
 
 interface OverviewState {
     data?: Prices | null
@@ -6,7 +6,7 @@ interface OverviewState {
     error: boolean
     id: string
     days: number
-    prices: null | CurrencyPrices
+    marketData: null | MarketData
 }
 
 const initialState = {
@@ -15,7 +15,7 @@ const initialState = {
     error: false,
     id: 'bitcoin',
     days: 30,
-    prices: null
+    marketData: null
 }
 
 const overviewReducer = (state: OverviewState = initialState, action: OverviewDataAction): OverviewState => {
@@ -37,10 +37,10 @@ const overviewReducer = (state: OverviewState = initialState, action: OverviewDa
                 isLoading: false,
                 error: true
             }
-        case GET_COIN_PRICE:
+        case GET_COIN_MARKET_DATA:
             return {
                 ...state,
-                prices: action.payload
+                marketData: action.payload
             }
         case CHANGE_DAYS:
             return {
