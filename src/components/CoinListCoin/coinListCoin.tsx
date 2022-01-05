@@ -6,7 +6,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { ProgressBar, CoinChart } from "components";
 import { Coin } from "store/coinList/types";
 import { RootState } from "store";
-import { showCurrencySymbol } from "utils/showCurrencySymbol";
+import { showCurrencySymbol } from "utils/currencyConversions/showCurrencySymbol";
 
 interface CoinProps {
    coin: Coin;

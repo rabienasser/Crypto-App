@@ -9,7 +9,7 @@ import { RootState } from "store";
 import { searchCoins } from "store/searchCoins/actions";
 import { getCoinsByMarketCap, getCoinsByVolume } from "store/coinList/actions";
 import { CurrencyListItem } from "components";
-import { showCurrencySymbol } from "utils/showCurrencySymbol";
+import { showCurrencySymbol } from "utils/currencyConversions/showCurrencySymbol";
 import "./navbar.style.scss";
 
 const Navbar: FC = () => {

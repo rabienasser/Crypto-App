@@ -1,0 +1,31 @@
+@import "App.scss";
+
+.chart-settings {
+   background: $dark-background;
+   width: 50%;
+   margin: auto;
+   border-radius: 20px;
+
+   ul {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 15px;
+
+      button {
+         cursor: pointer;
+         background: $light-grey;
+         padding: 7px 15px;
+         border-radius: 20px;
+         color: white;
+         border: none;
+         font-size: 1rem;
+      }
+
+      .selected-button {
+         background: $third-color;
+         color: $dark-background;
+         font-weight: bold;
+      }
+   }
+}

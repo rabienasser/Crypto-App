@@ -3,7 +3,7 @@ import { RootState } from "store";
 import { useSelector } from "react-redux";
 import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
 import { convertNumToPercent } from "utils/numberConversions/convertNumToPercent";
-import { showCurrencySymbol } from "utils/showCurrencySymbol";
+import { showCurrencySymbol } from "utils/currencyConversions/showCurrencySymbol";
 import "./progressBar.style.scss";
 
 interface ProgressBarProps {

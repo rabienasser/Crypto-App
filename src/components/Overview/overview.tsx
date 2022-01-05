@@ -4,14 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { debounce } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { getOverviewChartData, changeCoin } from "store/overview/actions";
 import {
-   changeDays,
-   getOverviewChartData,
-   changeCoin,
-} from "store/overview/actions";
-import { OverviewCoinChart } from "components";
+   OverviewCoinChart,
+   OverviewVolumeChart,
+   OverviewChartSettings,
+} from "components";
 import { searchCoins } from "store/searchCoins/actions";
-import { showCurrencySymbol } from "utils/showCurrencySymbol";
+import { showCurrencySymbol } from "utils/currencyConversions/showCurrencySymbol";
+import { selectChartCurrency } from "utils/currencyConversions/selectOverviewChartCurrency";
+import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
 import "./overview.style.scss";
 
 const Overview: FC = () => {
@@ -19,7 +21,7 @@ const Overview: FC = () => {
    const [chartInputValue, setChartInputValue] = useState("");
    const [isSearchList, setSearchList] = useState(false);
 
-   const { prices, days, id } = useSelector(
+   const { marketData, days, id } = useSelector(
       (state: RootState) => state.overview
    );
    const { coins } = useSelector((state: RootState) => state.searchCoins);
@@ -29,19 +31,6 @@ const Overview: FC = () => {
 
    const dispatchSearchCoins = () => {
       dispatch(searchCoins(chartInputValue));
-   };
-
-   const selectChartCurrency = () => {
-      switch (currency) {
-         case "usd":
-            return prices?.usd;
-         case "gbp":
-            return prices?.gbp;
-         case "eur":
-            return prices?.eur;
-         default:
-            return prices?.jpy;
-      }
    };
 
    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,9 +55,12 @@ const Overview: FC = () => {
       setChartInputValue("");
    };
 
-   const chartPrice = selectChartCurrency()
+   const chartPrice = selectChartCurrency(marketData, currency, false)
       ?.toFixed(2)
       .replace(/\d(?=(\d{3})+\.)/g, "$&,");
+
+   let chartVolume = selectChartCurrency(marketData, currency, true);
+   chartVolume = convertLargeNum(chartVolume!);
 
    const chartDate = new Date().toLocaleString("en-US", {
       month: "long",
@@ -150,45 +142,22 @@ const Overview: FC = () => {
                </div>
             </div>
             <div className="chart">
+               <div className="chart-details">
+                  <div className="coin-specifics">
+                     <p>Volume 24hr</p>
+                     <p className="price">
+                        {showCurrencySymbol(currency)}
+                        {chartVolume}
+                     </p>
+                     <p>{chartDate}</p>
+                  </div>
+               </div>
                <div className="line-chart">
-                  <OverviewCoinChart />
+                  <OverviewVolumeChart />
                </div>
             </div>
          </div>
-         <div className="chart-settings">
-            <ul>
-               <button
-                  className={days === 7 ? "selected-button" : ""}
-                  onClick={() => dispatch(changeDays(7))}
-               >
-                  1w
-               </button>
-               <button
-                  className={days === 30 ? "selected-button" : ""}
-                  onClick={() => dispatch(changeDays(30))}
-               >
-                  1m
-               </button>
-               <button
-                  className={days === 90 ? "selected-button" : ""}
-                  onClick={() => dispatch(changeDays(90))}
-               >
-                  3m
-               </button>
-               <button
-                  className={days === 180 ? "selected-button" : ""}
-                  onClick={() => dispatch(changeDays(180))}
-               >
-                  6m
-               </button>
-               <button
-                  className={days === 365 ? "selected-button" : ""}
-                  onClick={() => dispatch(changeDays(365))}
-               >
-                  1y
-               </button>
-            </ul>
-         </div>
+         <OverviewChartSettings days={days} />
       </div>
    );
 };

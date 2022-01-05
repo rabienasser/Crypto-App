@@ -2,8 +2,11 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
-import { showCurrencySymbol } from "utils/showCurrencySymbol";
-import { globalMarketCap, globalVolume } from "utils/globalDataCurrency";
+import { showCurrencySymbol } from "utils/currencyConversions/showCurrencySymbol";
+import {
+   globalMarketCap,
+   globalVolume,
+} from "utils/currencyConversions/globalDataCurrency";
 import "./globalDataBar.style.scss";
 
 interface ProgressBarProps {

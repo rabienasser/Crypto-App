@@ -1,6 +1,6 @@
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../index";
-import { SET_OVERVIEW_LOADING, GET_OVERVIEW_DATA, SET_OVERVIEW_ERROR, GET_COIN_PRICE, CHANGE_DAYS, CHANGE_COIN, OverviewDataAction } from "./types";
+import { SET_OVERVIEW_LOADING, GET_OVERVIEW_DATA, SET_OVERVIEW_ERROR, GET_COIN_MARKET_DATA, CHANGE_DAYS, CHANGE_COIN, OverviewDataAction } from "./types";
 
 export const getOverviewChartData = (): ThunkAction<void, RootState, null, OverviewDataAction> => async (dispatch, getState) => {
     try {
@@ -14,7 +14,7 @@ export const getOverviewChartData = (): ThunkAction<void, RootState, null, Overv
 
         const data = await res.json()
 
-        dispatch(getCoinPrice())
+        dispatch(getCoinMarketData())
         dispatch({
             type: GET_OVERVIEW_DATA,
             payload: data
@@ -25,16 +25,16 @@ export const getOverviewChartData = (): ThunkAction<void, RootState, null, Overv
     }
 }
 
-export const getCoinPrice = (): ThunkAction<void, RootState, null, OverviewDataAction> => async (dispatch, getState) => {
+export const getCoinMarketData = (): ThunkAction<void, RootState, null, OverviewDataAction> => async (dispatch, getState) => {
         const state = getState()
         const { id, error } = state.overview
 
         const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`)
         if(!error){
-            const { market_data: { current_price } } = await res.json()
+            const { market_data } = await res.json()
             dispatch({
-                type: GET_COIN_PRICE,
-                payload: current_price
+                type: GET_COIN_MARKET_DATA,
+                payload: market_data
             })
         }
 }
