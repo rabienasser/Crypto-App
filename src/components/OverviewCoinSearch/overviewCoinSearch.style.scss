@@ -1,0 +1,52 @@
+@import "App.scss";
+
+.coin-showing {
+   div {
+      display: flex;
+      p {
+         padding: 0 3px;
+      }
+      span {
+         display: flex;
+
+         .icon {
+            margin: auto;
+            cursor: pointer;
+            color: $third-color;
+         }
+      }
+   }
+
+   .search-bar {
+      margin-top: 0.8rem;
+
+      input {
+         background: $light-grey;
+         color: white;
+         border: none;
+         padding: 5px 10px;
+         border-radius: 20px;
+
+         &:focus {
+            outline: none;
+         }
+      }
+
+      ul {
+         display: flex;
+         flex-direction: column;
+         z-index: 1;
+         padding: 5px 0;
+         background: $dark-background;
+
+         li {
+            cursor: pointer;
+            padding: 5px;
+
+            &:hover {
+               background: $light-grey;
+            }
+         }
+      }
+   }
+}

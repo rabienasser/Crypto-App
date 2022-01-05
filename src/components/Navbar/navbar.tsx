@@ -4,20 +4,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { debounce } from "lodash";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import {
+   faSearch,
+   faCaretDown,
+   faBars,
+} from "@fortawesome/free-solid-svg-icons";
 import { RootState } from "store";
 import { searchCoins } from "store/searchCoins/actions";
 import { getCoinsByMarketCap, getCoinsByVolume } from "store/coinList/actions";
 import { CurrencyListItem } from "components";
 import { showCurrencySymbol } from "utils/currencyConversions/showCurrencySymbol";
+import useWindowSize from "hooks/useWindowSize";
 import "./navbar.style.scss";
 
 const Navbar: FC = () => {
    const [value, setValue] = useState("");
    const [isSearchList, setSearchList] = useState(false);
    const [isCurrencyList, setCurrencyList] = useState(false);
+   const [isHamburgerMenu, setHamburgerMenu] = useState(false);
 
    const { pathname } = useLocation();
+   const size = useWindowSize();
 
    const dispatch = useDispatch();
    const dispatchSearchCoins = () => {
@@ -38,6 +45,10 @@ const Navbar: FC = () => {
 
    const handleCurrencyList = () => {
       setCurrencyList(!isCurrencyList);
+   };
+
+   const handleHamburgerMenu = () => {
+      setHamburgerMenu(!isHamburgerMenu);
    };
 
    const closeSearchList = () => {
@@ -65,6 +76,7 @@ const Navbar: FC = () => {
 
    useEffect(() => {
       setValue("");
+      setHamburgerMenu(false);
    }, [pathname]);
 
    useEffect(() => {
@@ -75,20 +87,23 @@ const Navbar: FC = () => {
 
    return (
       <nav>
-         <div className="left-nav">
-            <NavLink
-               className={({ isActive }) => (isActive ? "active" : "")}
-               to="/"
-            >
-               Coins
-            </NavLink>
-            <NavLink
-               className={({ isActive }) => (isActive ? "active" : "")}
-               to="/portfolio"
-            >
-               Portfolio
-            </NavLink>
-         </div>
+         {size.width! > 600 && (
+            <div className="left-nav">
+               <NavLink
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                  to="/"
+               >
+                  Coins
+               </NavLink>
+               <NavLink
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                  to="/portfolio"
+               >
+                  Portfolio
+               </NavLink>
+            </div>
+         )}
+
          <div className="right-nav">
             <div className="input">
                <div>
@@ -118,6 +133,7 @@ const Navbar: FC = () => {
                   <p>{currency.toUpperCase()}</p>
                   <FontAwesomeIcon className="icon" icon={faCaretDown} />
                </button>
+
                {isCurrencyList && (
                   <ul>
                      <CurrencyListItem
@@ -148,6 +164,22 @@ const Navbar: FC = () => {
                )}
             </div>
          </div>
+
+         {size.width! <= 600 && (
+            <div className="hamburger-menu">
+               <FontAwesomeIcon
+                  onClick={handleHamburgerMenu}
+                  icon={faBars}
+                  className="hamburger-icon"
+               />
+               {isHamburgerMenu && (
+                  <ul>
+                     <Link to="/">Coins</Link>
+                     <Link to="/portfolio">Portfolio</Link>
+                  </ul>
+               )}
+            </div>
+         )}
       </nav>
    );
 };
