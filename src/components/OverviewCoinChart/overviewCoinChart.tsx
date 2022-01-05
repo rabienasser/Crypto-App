@@ -23,9 +23,16 @@ ChartJS.register(
 
 const OverviewCoinChart: FC = () => {
    const { data } = useSelector((state: RootState) => state.overview);
+
+   const dates = data?.total_volumes.map((arr: number[]) =>
+      new Date(arr[0]).toLocaleDateString("en-US", {
+         day: "numeric",
+         month: "numeric",
+      })
+   );
    const prices = data?.prices?.map((arr: number[]) => arr[1]);
 
-   const labels = prices?.map((_: any, idx: number) => idx + 1);
+   const labels = dates;
 
    const options = {
       responsive: true,
