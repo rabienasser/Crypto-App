@@ -20,12 +20,13 @@ ChartJS.register(
 
 interface CoinChartProps {
    data: number[];
+   sevenDay: number;
 }
 
-const CoinChart: FC<CoinChartProps> = ({ data }) => {
+const CoinChart: FC<CoinChartProps> = ({ data, sevenDay }) => {
    const size = useWindowSize();
 
-   const increasing = data[data.length - 1] - data[0] > 0;
+   const increasing = sevenDay > 0;
    const labels = data.map((dataPoint) => "");
 
    const chartStyle = {

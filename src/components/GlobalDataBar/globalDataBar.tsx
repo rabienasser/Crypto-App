@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import { getIsAppLoading } from "store/coinList/coinListReducer";
 import { convertLargeNum } from "utils/numberConversions/convertLargeNum";
 import { showCurrencySymbol } from "utils/currencyConversions/showCurrencySymbol";
 import {
@@ -29,10 +30,11 @@ const GlobalDataBar: FC = () => {
    const { currency } = useSelector((state: RootState) => state.coinList);
 
    const size = useWindowSize();
+   const isLoading = useSelector(getIsAppLoading);
 
    return (
       <div className="global-data">
-         {globalData && (
+         {!isLoading && globalData && (
             <ul>
                {size.width! > 400 && (
                   <li>

@@ -1,7 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { debounce } from "lodash";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -27,9 +26,6 @@ const Navbar: FC = () => {
    const size = useWindowSize();
 
    const dispatch = useDispatch();
-   const dispatchSearchCoins = () => {
-      dispatch(searchCoins(value));
-   };
 
    const { coins } = useSelector((state: RootState) => state.searchCoins);
    const { currency, marketCap, top } = useSelector(
@@ -39,7 +35,7 @@ const Navbar: FC = () => {
    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
       setValue(e.currentTarget.value);
       if (value !== "") {
-         debounce(dispatchSearchCoins)();
+         dispatch(searchCoins(value));
       }
    };
 

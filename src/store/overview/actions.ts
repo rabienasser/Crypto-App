@@ -12,9 +12,14 @@ export const getOverviewChartData = (): ThunkAction<void, RootState, null, Overv
 
         const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}&interval=daily`)
 
+        if(!res.ok) {
+            throw Error
+        }
+
         const data = await res.json()
 
         dispatch(getCoinMarketData())
+
         dispatch({
             type: GET_OVERVIEW_DATA,
             payload: data
