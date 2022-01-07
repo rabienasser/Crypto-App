@@ -29,7 +29,8 @@ const overviewReducer = (state: OverviewState = initialState, action: OverviewDa
             return {
                 ...state,
                 isLoading: false,
-                data: action.payload
+                data: action.payload,
+                error: false,
             }
         case SET_OVERVIEW_ERROR:
             return {

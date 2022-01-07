@@ -136,7 +136,10 @@ const CoinListCoin: FC<CoinProps> = ({ coin, idx }) => {
 
          {size.width! > 700 && (
             <td>
-               <CoinChart data={coin.sparkline_in_7d.price} />
+               <CoinChart
+                  data={coin.sparkline_in_7d.price}
+                  sevenDay={coin.price_change_percentage_7d_in_currency}
+               />
             </td>
          )}
       </tr>
